@@ -5,7 +5,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource'],
  function(oj, ko, $) {
   
     function DashboardViewModel() {
@@ -65,6 +65,14 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
       self.handleDetached = function(info) {
         // Implement if needed
       };
+
+        var dataArray = [{SKU: 'IPhone7', Price: 699, Catalog: 'Phone', Unit: 1, Supplier: "Apple"},
+            {SKU: 'IPad2', Price: 399, Catalog: 'Computer', Unit: 3, Supplier: "Apple"},
+            {SKU: 'MacBook Pro', Price: 2199, Catalog: 'Computer', Unit: 5, Supplier: "Apple"},
+            {SKU: 'Apple Watch2', Price: 349, Catalog: 'Watch', Unit: 6, Supplier: "Apple"},
+            {SKU: 'IMac', Price: 1799, Catalog: 'Computer', Unit: 2, Supplier: "Apple"}];
+
+        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'SKU'});
     }
 
     /*

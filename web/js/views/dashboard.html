@@ -4,7 +4,19 @@
  -->
 <div class="oj-hybrid-padding">
   <h3>Dashboard Content Area</h3>
-  <div>
-      To change the content of this section, you will make edits to the dashboard.html file located in the /js/views folder.
-  </div>
+    <table id="table" summary="Procurement List" aria-label="Procurement Table"
+           data-bind="ojComponent: {component: 'ojTable',
+                                data: datasource,
+                                columnsDefault: {sortable: 'none'},
+                                columns: [{headerText: 'SKU',
+                                           field: 'SKU'},
+                                          {headerText: 'Price',
+                                           field: 'Price'},
+                                          {headerText: 'Catalog',
+                                           field: 'Catalog'},
+                                          {headerText: 'Unit',
+                                           field: 'Unit'},
+                                           {headerText: 'Supplier',
+                                           field: 'Supplier'},]}">
+    </table>
 </div>
