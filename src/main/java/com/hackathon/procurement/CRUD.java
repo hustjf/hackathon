@@ -1,3 +1,4 @@
+package com.hackathon.procurement;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,7 +14,7 @@ public class CRUD {
     @GET
     // The Java method will produce content identified by the MIME Media type "text/plain"
     @Produces("text/plain")
-    public String getClichedMessage() {
+    public String getData() {
         // Return some cliched textual content
         return "Hello World";
     }

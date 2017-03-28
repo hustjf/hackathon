@@ -5,7 +5,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton'],
  function(oj, ko, $) {
   
     function DashboardViewModel() {
@@ -73,6 +73,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             {SKU: 'IMac', Price: 1799, Catalog: 'Computer', Unit: 2, Supplier: "Apple"}];
 
         self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'SKU'});
+
+        self.buttonClick = function(data, event){
+            $.ajax({
+                url: "./rest/crud",
+                type: "GET",
+                data: { name: "super", age: 20 },
+                dataType: "json",
+                success: function (response, xml) {
+                    alert(response);
+                },
+                fail: function (status) {
+
+                }
+            });
+            return true;
+        }
     }
 
     /*
