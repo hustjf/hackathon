@@ -7,7 +7,7 @@ import javax.ws.rs.Produces;
 /**
  * Created by alex on 17/3/27.
  */
-// The Java class will be hosted at the URI path "/helloworld"
+// The Java class will be hosted at the URI path "/crud"
 @Path("/crud")
 public class CRUD {
     // The Java method will process HTTP GET requests

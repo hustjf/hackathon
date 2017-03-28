@@ -78,12 +78,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             $.ajax({
                 url: "./rest/crud",
                 type: "GET",
-                data: { name: "super", age: 20 },
+                data: {},
                 dataType: "json",
-                success: function (response, xml) {
+                success: function (response, textStatus) {
                     alert(response);
                 },
-                fail: function (status) {
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
 
                 }
             });
