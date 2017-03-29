@@ -79,7 +79,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 url: "./rest/crud",
                 type: "GET",
                 data: {},
-                dataType: "json",
+                dataType: "",
                 success: function (response, textStatus) {
                     alert(response);
                 },
