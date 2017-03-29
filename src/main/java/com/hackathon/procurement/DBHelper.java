@@ -1,12 +1,14 @@
 package com.hackathon.procurement;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alex on 17/3/28.
  */
 public class DBHelper {
-    private Connection getConnection() {
+    private static Connection getConnection() {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch(ClassNotFoundException e){
@@ -23,10 +25,27 @@ public class DBHelper {
     }
 
 
+    public static List<Item> getData() throws SQLException {
+        List<Item> itemList = new ArrayList<Item>();
+        Connection connection = getConnection();
+        String sql = "select * from items";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()){
+            String SKU = rs.getString(1);
+            double price = rs.getDouble(2);
+            String Catalog = rs.getString(3);
+            int Unit = rs.getInt(4);
+            String Supplier = rs.getString(5);
+            Item item = new Item(SKU, price, Catalog, Unit, Supplier);
+            itemList.add(item);
+        }
+        return itemList;
+    }
+
     public static void main(String[] args) throws SQLException {
-        DBHelper dbHelper = new DBHelper();
-        Connection connection = dbHelper.getConnection();
-        String sql = "select * from hackathon";
+        Connection connection = getConnection();
+        String sql = "select * from items";
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()){
