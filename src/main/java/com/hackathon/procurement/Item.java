@@ -14,6 +14,8 @@ public class Item {
     private int unit;
     private String supplier;
 
+    public Item() {}
+
     public Item(String sku, double price, String catalog, int unit, String supplier) {
         this.sku = sku;
         this.price = price;

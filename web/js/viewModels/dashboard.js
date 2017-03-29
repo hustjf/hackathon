@@ -66,13 +66,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         // Implement if needed
       };
 
-        var dataArray = [{SKU: 'IPhone7', Price: 699, Catalog: 'Phone', Unit: 1, Supplier: "Apple"},
-            {SKU: 'IPad2', Price: 399, Catalog: 'Computer', Unit: 3, Supplier: "Apple"},
-            {SKU: 'MacBook Pro', Price: 2199, Catalog: 'Computer', Unit: 5, Supplier: "Apple"},
-            {SKU: 'Apple Watch2', Price: 349, Catalog: 'Watch', Unit: 6, Supplier: "Apple"},
-            {SKU: 'IMac', Price: 1799, Catalog: 'Computer', Unit: 2, Supplier: "Apple"}];
+        var dataArray = [{sku: 'IPhone7', price: 699, catalog: 'Phone', unit: 1, supplier: "Apple"},
+            {sku: 'IPad2', price: 399, catalog: 'Computer', unit: 3, supplier: "Apple"},
+            {sku: 'MacBook Pro', price: 2199, catalog: 'Computer', unit: 5, supplier: "Apple"},
+            {sku: 'Apple Watch2', price: 349, catalog: 'Watch', unit: 6, supplier: "Apple"},
+            {sku: 'IMac', price: 1799, catalog: 'Computer', unit: 2, supplier: "Apple"}];
 
-        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'SKU'});
+        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'sku'});
 
         self.buttonClick = function(data, event){
             $.ajax({
@@ -81,7 +81,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 data: {},
                 dataType: "",
                 success: function (response, textStatus) {
-                    alert(response);
+                    var data = [];
+                    data.push(response);
+                    self.datasource = new oj.ArrayTableDataSource(data, {idAttribute: 'sku'});
+                    $('#table').ojTable({"data" : self.datasource});
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
 

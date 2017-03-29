@@ -3,7 +3,6 @@ package com.hackathon.procurement;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,16 +15,17 @@ public class CRUD {
     // The Java method will process HTTP GET requests
     @GET
     // The Java method will produce content identified by the MIME Media type "text/plain"
-    @Produces("text/plain")
-    public Response getData() {
-        // Return some cliched textual content
+    @Produces("application/json")
+    public Item getData() {
+        List<Item> itemList;
         try {
-            List<Item> itemList = DBHelper.getData();
-            return Response.status(Response.Status.OK).entity(itemList).build();
+            itemList = DBHelper.getData();
+//            return Response.status(Response.Status.OK).entity(itemList).build();
         } catch (SQLException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+            itemList = null;
         }
-
+        return itemList.get(0);
     }
 
 }
