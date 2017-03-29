@@ -1,8 +1,12 @@
 package com.hackathon.procurement;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by Alex on 2017/3/27.
  */
+@XmlRootElement
+
 public class Item {
     private String sku;
     private double price;

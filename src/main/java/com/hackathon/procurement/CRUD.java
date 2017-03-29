@@ -23,7 +23,7 @@ public class CRUD {
             List<Item> itemList = DBHelper.getData();
             return Response.status(Response.Status.OK).entity(itemList).build();
         } catch (SQLException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
 
     }
