@@ -1,9 +1,8 @@
 package com.hackathon.procurement;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import java.sql.SQLException;
+import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -14,18 +13,35 @@ import java.util.List;
 public class CRUD {
     // The Java method will process HTTP GET requests
     @GET
-    // The Java method will produce content identified by the MIME Media type "text/plain"
+    // The Java method will produce content identified by the MIME Media type "application/json"
     @Produces("application/json")
-    public Item getData() {
+    public Response getData() {
         List<Item> itemList;
         try {
             itemList = DBHelper.getData();
-//            return Response.status(Response.Status.OK).entity(itemList).build();
-        } catch (SQLException e) {
-//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
-            itemList = null;
+            GenericEntity<List<Item>> entity = new GenericEntity<List<Item>>(itemList){};
+            return Response.status(Response.Status.OK).entity(entity).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
-        return itemList.get(0);
+    }
+
+    @POST
+    // The Java method will produce content identified by the MIME Media type "text/plain"
+    @Consumes("application/json")
+    @Produces("text/plain")
+    public Response addData(Item item) {
+        boolean isSuccess = false;
+        try {
+            isSuccess = DBHelper.addData(item);
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+        if (isSuccess) {
+            return Response.status(Response.Status.OK).build();
+        } else {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("insert data failed").build();
+        }
     }
 
 }

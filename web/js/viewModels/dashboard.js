@@ -74,20 +74,36 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
 
         self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'sku'});
 
-        self.buttonClick = function(data, event){
+        self.button_getdata = function(data, event){
             $.ajax({
                 url: "./rest/crud",
                 type: "GET",
                 data: {},
                 dataType: "",
                 success: function (response, textStatus) {
-                    var data = [];
-                    data.push(response);
-                    self.datasource = new oj.ArrayTableDataSource(data, {idAttribute: 'sku'});
+                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'sku'});
                     $('#table').ojTable({"data" : self.datasource});
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return true;
+        };
 
+        self.button_adddata = function(data, event){
+            $.ajax({
+                url: "./rest/crud",
+                type: "POST",
+                data: JSON.stringify({sku: 'IMac', price: 1799, catalog: 'Computer', unit: 2, supplier: "Apple"}),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("add success!");
+                    self.button_getdata();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
                 }
             });
             return true;

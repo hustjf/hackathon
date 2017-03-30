@@ -15,6 +15,7 @@ public class DBHelper {
             e.printStackTrace();
         }
         Connection connection = null;
+        //Todo when final deploy on the server, url should change to localhost
         String url="jdbc:mysql://alexjiang.net:3306/hackathon";
         try {
             connection = DriverManager.getConnection(url,"hackathon","hackathon");
@@ -41,6 +42,19 @@ public class DBHelper {
             itemList.add(item);
         }
         return itemList;
+    }
+
+    public static boolean addData(Item item) throws SQLException {
+        Connection connection = getConnection();
+        String sql = "insert into items(SKU, Price, Catalog, Unit, Supplier) values(?, ?, ?, ?, ?)";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, item.getSku());
+        ps.setDouble(2, item.getPrice());
+        ps.setString(3, item.getCatalog());
+        ps.setInt(4, item.getUnit());
+        ps.setString(5, item.getSupplier());
+        int result = ps.executeUpdate();
+        return result > 0;
     }
 
     public static void main(String[] args) throws SQLException {
