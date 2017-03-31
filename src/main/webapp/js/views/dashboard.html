@@ -1,0 +1,44 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+    <h3>Dashboard Content Area</h3>
+    <table id="table" summary="Procurement List" aria-label="Procurement Table"
+           data-bind="ojComponent: {component: 'ojTable',
+                                data: datasource,
+                                columnsDefault: {sortable: 'none'},
+                                columns: [{headerText: 'Materialsid',
+                                           field: 'materialsid'},
+                                           {headerText: 'Matname',
+                                           field: 'matname'},
+                                           {headerText: 'CurrentStock',
+                                           field: 'currentstock'},
+                                           {headerText: 'TotalStock',
+                                           field: 'totalstock'},
+                                           {headerText: 'Type',
+                                           field: 'type'},
+                                          {headerText: 'Save',
+                                           field: 'save'},
+                                           {headerText: 'Price',
+                                           field: 'price'},
+                                          {headerText: 'SUK',
+                                           field: 'suk'},
+                                          {headerText: 'Unit',
+                                           field: 'unit'},
+                                           {headerText: 'Supplier',
+                                           field: 'supplier'},]}">
+    </table>
+
+    <br>
+
+    <button id="button_getdata"
+            data-bind="click: button_getdata,
+                       ojComponent: { component: 'ojButton', label: 'Get Data' }">
+    </button>
+
+    <button id="button_adddata"
+            data-bind="click: button_adddata,
+                       ojComponent: { component: 'ojButton', label: 'Add Data' }">
+    </button>
+</div>

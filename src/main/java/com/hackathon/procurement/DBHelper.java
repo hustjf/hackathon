@@ -1,25 +1,46 @@
 package com.hackathon.procurement;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by alex on 17/3/28.
  */
 public class DBHelper {
+
+    private static String driverName;
+    private static String url;
+    private static String user;
+    private static String password;
+
     private static Connection getConnection() {
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        }catch(ClassNotFoundException e){
+
+        try {
+            InputStream in = DBHelper.class.getClassLoader().getResourceAsStream("dbinfo.properties");
+            Properties properties = new Properties();
+            properties.load(in);
+            driverName = properties.getProperty("driverName");
+            url = properties.getProperty("url");
+            user = properties.getProperty("user");
+            password = properties.getProperty("password");
+            Class.forName(driverName);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         Connection connection = null;
         //Todo when final deploy on the server, url should change to localhost
-        String url="jdbc:mysql://alexjiang.net:3306/hackathon";
+        // String url="jdbc:mysql://alexjiang.net:3306/hackathon";
+        //String url="jdbc:mysql://localhost:3306/hackathon";
         try {
-            connection = DriverManager.getConnection(url,"hackathon","hackathon");
-        } catch (SQLException e){
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return connection;
@@ -32,7 +53,7 @@ public class DBHelper {
         String sql = "select * from items";
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        while (rs.next()){
+        while (rs.next()) {
             String SKU = rs.getString(1);
             double price = rs.getDouble(2);
             String Catalog = rs.getString(3);
@@ -62,7 +83,7 @@ public class DBHelper {
         String sql = "select * from items";
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        while (rs.next()){
+        while (rs.next()) {
             System.out.print(rs.getString(1) + "\t");
             System.out.print(rs.getDouble(2) + "\t");
             System.out.print(rs.getString(3) + "\t");
