@@ -1,11 +1,13 @@
-package com.oracle.hackathon.utils;
+package com.oracle.hackathon.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;
+import static com.oracle.hackathon.dao.DepotDBEntityManagerFactory.emf;
 
 /**
  * Created by xinyuan.zhang on 3/30/17.
@@ -14,12 +16,10 @@ import java.util.List;
 public abstract class AbstractDao<T extends Serializable> implements Serializable {
 
     private final Class<T> clazz;
+    protected  EntityManager em;
 
-    private EntityManager em;
-
-
-    public AbstractDao(Class<T> clazz,EntityManager em) {
-        this.em =em;
+    public AbstractDao(Class<T> clazz) {
+        this.em =emf.createEntityManager();
         this.clazz = clazz;
     }
 

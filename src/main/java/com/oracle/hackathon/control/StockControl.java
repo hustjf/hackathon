@@ -2,11 +2,6 @@ package com.oracle.hackathon.control;
 
 import com.oracle.hackathon.entities.Stock;
 import com.oracle.hackathon.service.StockService;
-
-
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,8 +10,6 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 
-import static com.oracle.hackathon.control.DepotDBEntityManagerFactory.emf;
-
 /**
  * Created by xinyuan.zhang on 3/31/17.
  */
@@ -24,9 +17,8 @@ import static com.oracle.hackathon.control.DepotDBEntityManagerFactory.emf;
 @Path("/stock")
 public class StockControl {
 
-    private EntityManager em = emf.createEntityManager(); ;
-    private StockService stockService ;
 
+    private StockService stockService = new StockService();
 
     @GET
     @Produces("application/json")
@@ -35,7 +27,7 @@ public class StockControl {
         List<Stock> stockList;
 
         if(stockService==null) {
-            stockService = new StockService(em);
+            stockService = new StockService();
         }
 
         try {

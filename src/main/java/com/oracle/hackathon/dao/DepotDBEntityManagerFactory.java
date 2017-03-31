@@ -1,4 +1,4 @@
-package com.oracle.hackathon.control;
+package com.oracle.hackathon.dao;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

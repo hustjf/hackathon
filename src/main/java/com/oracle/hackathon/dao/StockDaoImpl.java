@@ -1,9 +1,6 @@
 package com.oracle.hackathon.dao;
 
 import com.oracle.hackathon.entities.Stock;
-import com.oracle.hackathon.utils.AbstractDao;
-
-import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -11,10 +8,9 @@ import java.util.List;
  */
 public class StockDaoImpl extends AbstractDao implements StockDao {
 
-    public StockDaoImpl(Class clazz,EntityManager em) {
+    public StockDaoImpl(Class clazz) {
 
-        super(clazz,em);
-        System.out.println(em);
+        super(clazz);
     }
 
     public Stock findById(int id) {
@@ -27,6 +23,8 @@ public class StockDaoImpl extends AbstractDao implements StockDao {
     }
 
     public void add(Stock stock) {
+
+        em.persist(stock);
 
     }
 

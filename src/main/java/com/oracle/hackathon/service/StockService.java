@@ -2,15 +2,7 @@ package com.oracle.hackathon.service;
 
 import com.oracle.hackathon.dao.StockDaoImpl;
 import com.oracle.hackathon.entities.Stock;
-
-import javax.persistence.EntityManager;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
 import java.util.List;
-
 import com.oracle.hackathon.dao.StockDao;
 
 /**
@@ -20,16 +12,8 @@ import com.oracle.hackathon.dao.StockDao;
 
 public class StockService {
 
-    private StockDao stockDao;
+    private StockDao stockDao = new StockDaoImpl(Stock.class);;
 
-
-    protected EntityManager em;
-
-
-    public StockService(EntityManager em) {
-        this.em = em;
-        stockDao = new StockDaoImpl(Stock.class,em);
-    }
 
     public List<Stock> findAll() {
         return stockDao.findAll();
