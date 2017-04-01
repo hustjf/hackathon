@@ -5,7 +5,7 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton'],
  function(oj, ko, $) {
   
     function IncidentsViewModel() {
@@ -65,8 +65,30 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
       self.handleDetached = function(info) {
         // Implement if needed
       };
-    }
+	  
+			
+        var dataArray1 = [
+			{supplier: 'met', phone: 699, email: '**@qq.com', contact: 'p1'},
+			{supplier: 'met', phone: 699, email: '**@qq.com', contact: 'p1'},
+			{supplier: 'met', phone: 699, email: '**@qq.com', contact: 'p1'},
+			{supplier: 'met', phone: 699, email: '**@qq.com', contact: 'p1'}];
 
+        self.datasource1 = new oj.ArrayTableDataSource(dataArray1, {idAttribute: 'supplier'});
+		
+        var dataArray = [
+			{metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo"},
+            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo",materialID:"2016311"},
+            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo",materialID:"2016312"},
+            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo",materialID:"2017316"},
+            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo",materialID:"2017318"},
+            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo"},
+            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo"}];
+
+        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'sku'});
+			
+
+    }
+	
     /*
      * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
      * each time the view is displayed.  Return an instance of the ViewModel if

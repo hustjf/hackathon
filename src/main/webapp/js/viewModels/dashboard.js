@@ -72,16 +72,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             {sku: 'Apple Watch2', price: 349, catalog: 'Watch', unit: 6, supplier: "Apple"},
             {sku: 'IMac', price: 1799, catalog: 'Computer', unit: 2, supplier: "Apple"}];
 
-        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'materialsid'});
+        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'sku'});
 
         self.button_getdata = function(data, event){
             $.ajax({
-                url: "./rest/stock",
+                url: "./rest/crud",
                 type: "GET",
                 data: {},
                 dataType: "",
                 success: function (response, textStatus) {
-                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
+                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'sku'});
                     $('#table').ojTable({"data" : self.datasource});
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
