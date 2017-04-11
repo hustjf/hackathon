@@ -24,8 +24,9 @@ public class StockDaoImpl extends AbstractDao implements StockDao {
 
     public void add(Stock stock) {
 
+        em.getTransaction().begin();
         em.persist(stock);
-
+        em.getTransaction().commit();
     }
 
     public void delete(Stock stock) {

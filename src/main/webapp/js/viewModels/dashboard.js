@@ -66,22 +66,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         // Implement if needed
       };
 
-        var dataArray = [{sku: 'IPhone7', price: 699, catalog: 'Phone', unit: 1, supplier: "Apple"},
-            {sku: 'IPad2', price: 399, catalog: 'Computer', unit: 3, supplier: "Apple"},
-            {sku: 'MacBook Pro', price: 2199, catalog: 'Computer', unit: 5, supplier: "Apple"},
-            {sku: 'Apple Watch2', price: 349, catalog: 'Watch', unit: 6, supplier: "Apple"},
-            {sku: 'IMac', price: 1799, catalog: 'Computer', unit: 2, supplier: "Apple"}];
+        var dataArray = [{materialsid: 123, currentstock: 123, matname: "haha", price: 123, save: 123, suk: "haha", supplier: "haha", totalstock: 123, type: "haha", unit: "haha"}];
 
-        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'sku'});
+        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'materialsid'});
 
         self.button_getdata = function(data, event){
             $.ajax({
-                url: "./rest/crud",
+                url: "./rest/stock",
                 type: "GET",
                 data: {},
                 dataType: "",
                 success: function (response, textStatus) {
-                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'sku'});
+                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
                     $('#table').ojTable({"data" : self.datasource});
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -93,9 +89,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
 
         self.button_adddata = function(data, event){
             $.ajax({
-                url: "./rest/crud",
+                url: "./rest/stock",
                 type: "POST",
-                data: JSON.stringify({sku: 'IMac', price: 1799, catalog: 'Computer', unit: 2, supplier: "Apple"}),
+                data: JSON.stringify({materialsid: 456, currentstock: 456, matname: "haha", price: 456, save: 456, suk: "haha", supplier: "haha", totalstock: 456, type: "haha", unit: "haha"}),
                 dataType: "",
                 contentType: "application/json",
                 success: function (response, textStatus) {

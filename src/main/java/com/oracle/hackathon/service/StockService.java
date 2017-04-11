@@ -27,6 +27,10 @@ public class StockService {
     }
 
 
+    public void addStock(Stock stock) {
+        stockDao.add(stock);
+    }
+
     /*public static void main(String[] args) {
         StockService s = new StockService(emf.createEntityManager());
         System.out.println(s.findAll().size());
