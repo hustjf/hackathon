@@ -5,7 +5,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton', 'ojs/ojdialog', 'ojs/ojinputtext'],
  function(oj, ko, $) {
   
     function DashboardViewModel() {
@@ -69,6 +69,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         var dataArray = [{materialsid: 123, currentstock: 123, matname: "haha", price: 123, save: 123, suk: "haha", supplier: "haha", totalstock: 123, type: "haha", unit: "haha"}];
 
         self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'materialsid'});
+        self.materialsid = "";
+        self.currentstock = "";
+        self.matname = "";
+        self.price = "";
+        self.save = "";
+        self.suk = "";
+        self.supplier = "";
+        self.totalstock = "";
+        self.type = "";
+        self.unit = "";
 
         self.button_getdata = function(data, event){
             $.ajax({
@@ -87,6 +97,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             return true;
         };
 
+        self.button_openAddDialog = function(data, event){
+            $("#addDialog").ojDialog("open");
+            return true;
+        };
+
         self.button_adddata = function(data, event){
             $.ajax({
                 url: "./rest/stock",
@@ -97,13 +112,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 success: function (response, textStatus) {
                     alert("add success!");
                     self.button_getdata();
+                    $("#addDialog").ojDialog("close");
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     alert(XMLHttpRequest.responseText);
                 }
             });
             return true;
-        }
+        };
     }
 
     /*
