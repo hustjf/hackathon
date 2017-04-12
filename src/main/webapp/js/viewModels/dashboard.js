@@ -239,10 +239,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 alert("Please select at least one data to delete!");
                 return;
             }
+            var jsonArray = [];
+            for (var i = 0; i < checkedArray.length; ++i) {
+                jsonArray.push(eval('(' + checkedArray[i] + ')'));
+            }
             $.ajax({
                 url: "./rest/stock",
                 type: "DELETE",
-                data: JSON.stringify(eval('(' + checkedArray[0] + ')')),
+                data: JSON.stringify(jsonArray),
                 dataType: "",
                 contentType: "application/json",
                 success: function (response, textStatus) {

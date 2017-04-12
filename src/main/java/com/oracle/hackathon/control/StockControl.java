@@ -77,13 +77,13 @@ public class StockControl {
     // The Java method will produce content identified by the MIME Media type "text/plain"
     @Consumes("application/json")
     @Produces("text/plain")
-    public Response deleteData(Stock stock) {
+    public Response deleteData(List<Stock> stocks) {
         if(stockService==null) {
             stockService = new StockService();
         }
 
         try {
-            stockService.deleteStock(stock);
+            stockService.deleteStock(stocks);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

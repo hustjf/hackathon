@@ -29,9 +29,11 @@ public class StockDaoImpl extends AbstractDao implements StockDao {
         em.getTransaction().commit();
     }
 
-    public void delete(Stock stock) {
+    public void delete(List<Stock> stocks) {
         em.getTransaction().begin();
-        em.remove(em.contains(stock) ? stock : em.merge(stock));
+        for (Stock stock : stocks) {
+            em.remove(em.contains(stock) ? stock : em.merge(stock));
+        }
         em.getTransaction().commit();
     }
 

@@ -12,7 +12,7 @@ public interface StockDao {
     public Stock findById(int id);
     public List<Stock> findAll();
     public void add(Stock stock);
-    public void delete(Stock stock);
+    public void delete(List<Stock> stocks);
     public void update(Stock stock);
 
 

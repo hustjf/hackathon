@@ -36,8 +36,8 @@ public class StockService {
         stockDao.update(stock);
     }
 
-    public void deleteStock(Stock stock) {
-        stockDao.delete(stock);
+    public void deleteStock(List<Stock> stocks) {
+        stockDao.delete(stocks);
     }
 
     /*public static void main(String[] args) {
