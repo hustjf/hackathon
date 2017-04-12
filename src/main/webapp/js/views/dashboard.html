@@ -8,7 +8,9 @@
            data-bind="ojComponent: {component: 'ojTable',
                                 data: datasource,
                                 columnsDefault: {sortable: 'none'},
-                                columns: [{headerText: 'Materialsid',
+                                rowTemplate: 'row_tmpl',
+                                columns: [{headerTemplate: 'header_tmpl'},
+                                          {headerText: 'Materialsid',
                                            field: 'materialsid'},
                                           {headerText: 'Currentstock',
                                            field: 'currentstock'},
@@ -30,6 +32,40 @@
                                            field: 'unit'},]}">
     </table>
 
+    <script type="text/html" id="row_tmpl">
+        <tr>
+            <td><input type="checkbox" name="checkrow" data-bind="attr: {value: '{materialsid:' + materialsid + ',currentstock:' + currentstock + ',matname:\'' + matname + '\',price:' + price +
+            ',save:' + save + ',suk:\'' + suk + '\',supplier:\'' + supplier + '\',totalstock:' + totalstock + ',type:\'' + type + '\',unit:\'' + unit + '\'}'}"/></td>
+            <td data-bind="text: materialsid">
+            </td>
+            <td data-bind="text: currentstock">
+            </td>
+            <td data-bind="text: matname">
+            </td>
+            <td data-bind="text: price">
+            </td>
+            <td data-bind="text: save">
+            </td>
+            <td data-bind="text: suk">
+            </td>
+            <td data-bind="text: supplier">
+            </td>
+            <td data-bind="text: totalstock">
+            </td>
+            <td data-bind="text: type">
+            </td>
+            <td data-bind="text: unit">
+            </td>
+        </tr>
+    </script>
+
+    <script type="text/html" id="header_tmpl">
+        <tr>
+            <td><input type="checkbox" id="checkall"/></td>
+
+        </tr>
+    </script>
+
     <br>
 
     <button id="button_getdata"
@@ -42,63 +78,136 @@
                        ojComponent: { component: 'ojButton', label: 'Add Data' }">
     </button>
 
-    <div id="dialogWrapper">
+    <button id="button_openUpdateDialog"
+            data-bind="click: button_openUpdateDialog,
+                       ojComponent: { component: 'ojButton', label: 'Update Data' }">
+    </button>
+
+    <button id="button_deletedata"
+            data-bind="click: button_deletedata,
+                       ojComponent: { component: 'ojButton', label: 'Delete Data' }">
+    </button>
+
+    <div id="dialogWrapper_add">
         <div style="height:300px;width:500px;display:none" id="addDialog" title="Add Data"
              data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
             <div class="oj-dialog-body">
-                <label for="input_materialsid">Materialsid</label>
-                <input id="input_materialsid"
+                <label for="input_addmaterialsid">Materialsid</label>
+                <input id="input_addmaterialsid"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: materialsid}"/>
-                <label for="input_currentstock">Currentstock</label>
-                <input id="input_currentstock"
+                <label for="input_addcurrentstock">Currentstock</label>
+                <input id="input_addcurrentstock"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: currentstock}"/>
-                <label for="input_matname">Matname</label>
-                <input id="input_matname"
+                <label for="input_addmatname">Matname</label>
+                <input id="input_addmatname"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: matname}"/>
-                <label for="input_price">Price</label>
-                <input id="input_price"
+                <label for="input_addprice">Price</label>
+                <input id="input_addprice"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: price}"/>
-                <label for="input_save">Save</label>
-                <input id="input_save"
+                <label for="input_addsave">Save</label>
+                <input id="input_addsave"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: save}"/>
-                <label for="input_suk">Suk</label>
-                <input id="input_suk"
+                <label for="input_addsuk">Suk</label>
+                <input id="input_addsuk"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: suk}"/>
-                <label for="input_supplier">Supplier</label>
-                <input id="input_supplier"
+                <label for="input_addsupplier">Supplier</label>
+                <input id="input_addsupplier"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: supplier}"/>
-                <label for="input_totalstock">Totalstock</label>
-                <input id="input_totalstock"
+                <label for="input_addtotalstock">Totalstock</label>
+                <input id="input_addtotalstock"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: totalstock}"/>
-                <label for="input_type">Type</label>
-                <input id="input_type"
+                <label for="input_addtype">Type</label>
+                <input id="input_addtype"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: type}"/>
-                <label for="input_unit">Unit</label>
-                <input id="input_unit"
+                <label for="input_addunit">Unit</label>
+                <input id="input_addunit"
                        type="text"
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: unit}"/>
             </div>
             <div class="oj-dialog-footer">
-                <button id="okButton" data-bind="click: button_adddata,
+                <button id="okAddButton" data-bind="click: button_adddata,
+                                        ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="dialogWrapper_update">
+        <div style="height:300px;width:500px;display:none" id="updateDialog" title="Update Data"
+             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+            <div class="oj-dialog-body">
+                <label for="input_updatematerialsid">Materialsid</label>
+                <input id="input_updatematerialsid"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: materialsid}"/>
+                <label for="input_updatecurrentstock">Currentstock</label>
+                <input id="input_updatecurrentstock"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: currentstock}"/>
+                <label for="input_updatematname">Matname</label>
+                <input id="input_updatematname"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: matname}"/>
+                <label for="input_updateprice">Price</label>
+                <input id="input_updateprice"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: price}"/>
+                <label for="input_updatesave">Save</label>
+                <input id="input_updatesave"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: save}"/>
+                <label for="input_updatesuk">Suk</label>
+                <input id="input_updatesuk"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: suk}"/>
+                <label for="input_updatesupplier">Supplier</label>
+                <input id="input_updatesupplier"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: supplier}"/>
+                <label for="input_updatetotalstock">Totalstock</label>
+                <input id="input_updatetotalstock"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: totalstock}"/>
+                <label for="input_updatetype">Type</label>
+                <input id="input_updatetype"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: type}"/>
+                <label for="input_updateunit">Unit</label>
+                <input id="input_updateunit"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: unit}"/>
+            </div>
+            <div class="oj-dialog-footer">
+                <button id="okUpdateButton" data-bind="click: button_updatedata,
                                         ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
             </div>
         </div>

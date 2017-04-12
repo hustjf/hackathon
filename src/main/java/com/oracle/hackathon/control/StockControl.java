@@ -55,4 +55,38 @@ public class StockControl {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
+
+    @PUT
+    // The Java method will produce content identified by the MIME Media type "text/plain"
+    @Consumes("application/json")
+    @Produces("text/plain")
+    public Response updateData(Stock stock) {
+        if(stockService==null) {
+            stockService = new StockService();
+        }
+
+        try {
+            stockService.updateStock(stock);
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    // The Java method will produce content identified by the MIME Media type "text/plain"
+    @Consumes("application/json")
+    @Produces("text/plain")
+    public Response deleteData(Stock stock) {
+        if(stockService==null) {
+            stockService = new StockService();
+        }
+
+        try {
+            stockService.deleteStock(stock);
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
 }

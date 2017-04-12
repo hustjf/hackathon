@@ -1,9 +1,10 @@
 package com.oracle.hackathon.service;
 
+import com.oracle.hackathon.dao.StockDao;
 import com.oracle.hackathon.dao.StockDaoImpl;
 import com.oracle.hackathon.entities.Stock;
+
 import java.util.List;
-import com.oracle.hackathon.dao.StockDao;
 
 /**
  * Created by xinyuan.zhang on 3/30/17.
@@ -29,6 +30,14 @@ public class StockService {
 
     public void addStock(Stock stock) {
         stockDao.add(stock);
+    }
+
+    public void updateStock(Stock stock) {
+        stockDao.update(stock);
+    }
+
+    public void deleteStock(Stock stock) {
+        stockDao.delete(stock);
     }
 
     /*public static void main(String[] args) {

@@ -66,9 +66,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         // Implement if needed
       };
 
-        var dataArray = [{materialsid: 123, currentstock: 123, matname: "haha", price: 123, save: 123, suk: "haha", supplier: "haha", totalstock: 123, type: "haha", unit: "haha"}];
+        // var dataArray = [{materialsid: 123, currentstock: 123, matname: "haha", price: 123, save: 123, suk: "haha", supplier: "haha", totalstock: 123, type: "haha", unit: "haha"}];
 
-        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'materialsid'});
+        self.datasource = null;
+
+        $.ajax({
+            url: "./rest/stock",
+            type: "GET",
+            data: {},
+            dataType: "",
+            success: function (response, textStatus) {
+                self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
+                $('#table').ojTable({"data" : self.datasource});
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+            }
+        });
+
         self.materialsid = "";
         self.currentstock = "";
         self.matname = "";
@@ -102,17 +117,104 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             return true;
         };
 
+        self.button_openUpdateDialog = function(data, event){
+            var checkedArray = self.findChecked();
+            if (checkedArray.length != 1) {
+                alert("Please select only one data to update!");
+                return;
+            }
+            $("#updateDialog").ojDialog("open");
+            return true;
+        };
+
         self.button_adddata = function(data, event){
+            if (self.materialsid === "" || self.currentstock === "" || self.matname === "" || self.price === "" || self.save === "" || self.suk === "" || self.supplier === "" || self.totalstock === "" || self.type === "" || self.unit === "") {
+                alert("Please input all value!");
+                return;
+            }
             $.ajax({
                 url: "./rest/stock",
                 type: "POST",
-                data: JSON.stringify({materialsid: 456, currentstock: 456, matname: "haha", price: 456, save: 456, suk: "haha", supplier: "haha", totalstock: 456, type: "haha", unit: "haha"}),
+                data: JSON.stringify({materialsid: self.materialsid, currentstock: self.currentstock, matname: self.matname, price: self.price, save: self.save, suk: self.suk, supplier: self.supplier, totalstock: self.totalstock, type: self.type, unit: self.unit}),
                 dataType: "",
                 contentType: "application/json",
                 success: function (response, textStatus) {
                     alert("add success!");
                     self.button_getdata();
+                    $('#input_addmaterialsid').ojInputText({"value" : ""});
+                    $('#input_addcurrentstock').ojInputText({"value" : ""});
+                    $('#input_addmatname').ojInputText({"value" : ""});
+                    $('#input_addprice').ojInputText({"value" : ""});
+                    $('#input_addsave').ojInputText({"value" : ""});
+                    $('#input_addsuk').ojInputText({"value" : ""});
+                    $('#input_addsupplier').ojInputText({"value" : ""});
+                    $('#input_addtotalstock').ojInputText({"value" : ""});
+                    $('#input_addtype').ojInputText({"value" : ""});
+                    $('#input_addunit').ojInputText({"value" : ""});
+                    self.materialsid = "";
+                    self.currentstock = "";
+                    self.matname = "";
+                    self.price = "";
+                    self.save = "";
+                    self.suk = "";
+                    self.supplier = "";
+                    self.totalstock = "";
+                    self.type = "";
+                    self.unit = "";
                     $("#addDialog").ojDialog("close");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return true;
+        };
+
+        self.button_updatedata = function(data, event){
+            // $.ajax({
+            //     url: "./rest/stock",
+            //     type: "PUT",
+            //     data: checkedArray[0],
+            //     dataType: "",
+            //     contentType: "application/json",
+            //     success: function (response, textStatus) {
+            //         self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
+            //         $('#table').ojTable({"data" : self.datasource});
+            //     },
+            //     error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //         alert(XMLHttpRequest.responseText);
+            //     }
+            // });
+            return true;
+        };
+
+        self.findChecked = function() {
+            var selectedArray = [];
+            $("input:checkbox").each(function() {
+                var $this = $(this);
+                if ($this.is(":checked")) {
+                    // alert($this.attr("value"));
+                    selectedArray.push($this.attr("value"));
+                }
+            });
+            return selectedArray;
+        };
+
+        self.button_deletedata = function(data, event){
+            var checkedArray = self.findChecked();
+            if (checkedArray.length == 0) {
+                alert("Please select at least one data to delete!");
+                return;
+            }
+            $.ajax({
+                url: "./rest/stock",
+                type: "DELETE",
+                data: JSON.stringify(eval('(' + checkedArray[0] + ')')),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("Delete success!");
+                    self.button_getdata();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     alert(XMLHttpRequest.responseText);
