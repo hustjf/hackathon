@@ -20,20 +20,20 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarray
        // Router setup
        self.router = oj.Router.rootInstance;
        self.router.configure({
-         'dashboard': {label: 'Dashboard', isDefault: true},
-         'incidents': {label: 'Incidents'},
-         'customers': {label: 'Customers'},
+         'merchandises': {label: 'Merchandises', isDefault: true},
+         'shoppingcart': {label: 'Shopping Cart'},
+         'order': {label: 'Order'},
          'about': {label: 'About'}
        });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
       // Navigation setup
       var navData = [
-      {name: 'Dashboard', id: 'dashboard',
+      {name: 'Merchandises', id: 'merchandises',
        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
-      {name: 'Incidents', id: 'incidents',
+      {name: 'Shopping Cart', id: 'shoppingcart',
        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'},
-      {name: 'Customers', id: 'customers',
+      {name: 'Order', id: 'order',
        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'},
       {name: 'About', id: 'about',
        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-info-icon-24'}
