@@ -84,16 +84,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             }
         });
 
-        self.materialsid = "";
-        self.currentstock = "";
-        self.matname = "";
-        self.price = "";
-        self.save = "";
-        self.suk = "";
-        self.supplier = "";
-        self.totalstock = "";
-        self.type = "";
-        self.unit = "";
+        self.updatematerialsid = "";
+        self.updatecurrentstock = "";
+        self.updatematname = "";
+        self.updateprice = "";
+        self.updatesave = "";
+        self.updatesuk = "";
+        self.updatesupplier = "";
+        self.updatetotalstock = "";
+        self.updatetype = "";
+        self.updateunit = "";
+        self.addmaterialsid = "";
+        self.addcurrentstock = "";
+        self.addmatname = "";
+        self.addprice = "";
+        self.addsave = "";
+        self.addsuk = "";
+        self.addsupplier = "";
+        self.addtotalstock = "";
+        self.addtype = "";
+        self.addunit = "";
 
         self.button_getdata = function(data, event){
             $.ajax({
@@ -124,22 +134,44 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 return;
             }
             $("#updateDialog").ojDialog("open");
+            var val = eval('(' + checkedArray[0] + ')');
+            $('#input_updatematerialsid').ojInputText({"value" : val["materialsid"]});
+            $('#input_updatecurrentstock').ojInputText({"value" : val["currentstock"]});
+            $('#input_updatematname').ojInputText({"value" : val["matname"]});
+            $('#input_updateprice').ojInputText({"value" : val["price"]});
+            $('#input_updatesave').ojInputText({"value" : val["save"]});
+            $('#input_updatesuk').ojInputText({"value" : val["suk"]});
+            $('#input_updatesupplier').ojInputText({"value" : val["supplier"]});
+            $('#input_updatetotalstock').ojInputText({"value" : val["totalstock"]});
+            $('#input_updatetype').ojInputText({"value" : val["type"]});
+            $('#input_updateunit').ojInputText({"value" : val["unit"]});
+            self.updatematerialsid = val["materialsid"];
+            self.updatecurrentstock = val["currentstock"];
+            self.updatematname = val["matname"];
+            self.updateprice = val["price"];
+            self.updatesave = val["save"];
+            self.updatesuk = val["suk"];
+            self.updatesupplier = val["supplier"];
+            self.updatetotalstock = val["totalstock"];
+            self.updatetype = val["type"];
+            self.updateunit = val["unit"];
+
             return true;
         };
 
         self.button_adddata = function(data, event){
-            if (self.materialsid === "" || self.currentstock === "" || self.matname === "" || self.price === "" || self.save === "" || self.suk === "" || self.supplier === "" || self.totalstock === "" || self.type === "" || self.unit === "") {
+            if (self.addmaterialsid === "" || self.addcurrentstock === "" || self.addmatname === "" || self.addprice === "" || self.addsave === "" || self.addsuk === "" || self.addsupplier === "" || self.addtotalstock === "" || self.addtype === "" || self.addunit === "") {
                 alert("Please input all value!");
                 return;
             }
             $.ajax({
                 url: "./rest/stock",
                 type: "POST",
-                data: JSON.stringify({materialsid: self.materialsid, currentstock: self.currentstock, matname: self.matname, price: self.price, save: self.save, suk: self.suk, supplier: self.supplier, totalstock: self.totalstock, type: self.type, unit: self.unit}),
+                data: JSON.stringify({materialsid: self.addmaterialsid, currentstock: self.addcurrentstock, matname: self.addmatname, price: self.addprice, save: self.addsave, suk: self.addsuk, supplier: self.addsupplier, totalstock: self.addtotalstock, type: self.addtype, unit: self.addunit}),
                 dataType: "",
                 contentType: "application/json",
                 success: function (response, textStatus) {
-                    alert("add success!");
+                    alert("Add Success!");
                     self.button_getdata();
                     $('#input_addmaterialsid').ojInputText({"value" : ""});
                     $('#input_addcurrentstock').ojInputText({"value" : ""});
@@ -151,16 +183,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                     $('#input_addtotalstock').ojInputText({"value" : ""});
                     $('#input_addtype').ojInputText({"value" : ""});
                     $('#input_addunit').ojInputText({"value" : ""});
-                    self.materialsid = "";
-                    self.currentstock = "";
-                    self.matname = "";
-                    self.price = "";
-                    self.save = "";
-                    self.suk = "";
-                    self.supplier = "";
-                    self.totalstock = "";
-                    self.type = "";
-                    self.unit = "";
+                    self.addmaterialsid = "";
+                    self.addcurrentstock = "";
+                    self.addmatname = "";
+                    self.addprice = "";
+                    self.addsave = "";
+                    self.addsuk = "";
+                    self.addsupplier = "";
+                    self.addtotalstock = "";
+                    self.addtype = "";
+                    self.addunit = "";
                     $("#addDialog").ojDialog("close");
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -171,20 +203,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         };
 
         self.button_updatedata = function(data, event){
-            // $.ajax({
-            //     url: "./rest/stock",
-            //     type: "PUT",
-            //     data: checkedArray[0],
-            //     dataType: "",
-            //     contentType: "application/json",
-            //     success: function (response, textStatus) {
-            //         self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
-            //         $('#table').ojTable({"data" : self.datasource});
-            //     },
-            //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //         alert(XMLHttpRequest.responseText);
-            //     }
-            // });
+            $.ajax({
+                url: "./rest/stock",
+                type: "PUT",
+                data: JSON.stringify({materialsid: self.updatematerialsid, currentstock: self.updatecurrentstock, matname: self.updatematname, price: self.updateprice, save: self.updatesave, suk: self.updatesuk, supplier: self.updatesupplier, totalstock: self.updatetotalstock, type: self.updatetype, unit: self.updateunit}),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("Update Success!");
+                    self.button_getdata();
+                    $("#updateDialog").ojDialog("close");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
             return true;
         };
 
@@ -213,7 +246,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 dataType: "",
                 contentType: "application/json",
                 success: function (response, textStatus) {
-                    alert("Delete success!");
+                    alert("Delete Success!");
                     self.button_getdata();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
