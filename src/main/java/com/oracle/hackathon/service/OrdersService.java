@@ -24,6 +24,9 @@ public class OrdersService {
         ordersDao.add(orders);
     }
 
+    public void addById(int id) {
+        ordersDao.addById(id);
+    }
     public void updateOrder(Orders order) {
         ordersDao.update(order);
     }

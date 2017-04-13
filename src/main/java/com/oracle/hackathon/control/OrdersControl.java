@@ -36,6 +36,19 @@ public class OrdersControl {
         }
     }
 
+    @Path("/addtoCart")
+    @POST
+    // The Java method will produce content identified by the MIME Media type "text/plain"
+    @Produces("text/plain")
+    public Response addtoCart(String id) {
+        try {
+            ordersService.addById(Integer.parseInt(id));
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
 
     @POST
     // The Java method will produce content identified by the MIME Media type "text/plain"

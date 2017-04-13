@@ -20,19 +20,17 @@ public class Cart implements Serializable {
     private int count;
     private String type;
     private double price;
-    private int orderid;
 
 
     public Cart() {
     }
 
-    public Cart(int id, String name, int count, String type, double price, int orderid) {
+    public Cart(int id, String name, int count, String type, double price) {
         this.id = id;
         this.name = name;
         this.count = count;
         this.type = type;
         this.price = price;
-        this.orderid = orderid;
     }
 
 
@@ -76,11 +74,4 @@ public class Cart implements Serializable {
         this.price = price;
     }
 
-    public int getOrderid() {
-        return orderid;
-    }
-
-    public void setOrderid(int orderid) {
-        this.orderid = orderid;
-    }
 }

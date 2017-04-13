@@ -23,6 +23,13 @@ public class OrdersDaoImpl extends AbstractDao {
         return (List<Orders>) super.findAll();
     }
 
+    public void addById(int id) {
+        em.getTransaction().begin();
+        Orders order = findById(id);
+        em.persist(order);
+        em.getTransaction().commit();
+    }
+
     public void add(List<Orders> orders) {
 
         em.getTransaction().begin();
