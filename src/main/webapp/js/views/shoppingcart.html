@@ -60,6 +60,14 @@
                        ojComponent: { component: 'ojButton', label: 'Delete Goods' }">
 	</button>
 
+	<br>
+
+	<label for="text-input">Address</label>
+	<input id="text-input"
+		   type="text"
+		   data-bind="ojComponent: {component: 'ojInputText',
+                                  value: address}"/>
+
 	<button id="button_submit"
 			data-bind="click: button_submit,
                        ojComponent: { component: 'ojButton', label: 'Submit' }">

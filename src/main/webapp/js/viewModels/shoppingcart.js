@@ -87,6 +87,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         self.updatecount = "";
         self.updatetype = "";
         self.updateprice = "";
+        self.address = "";
 
 
         self.button_getdata = function(data, event){
@@ -189,6 +190,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         };
 
         self.button_submit = function(data, event){
+            if (self.address === "") {
+                alert('Please input address!');
+                return;
+            }
+
             // $.ajax({
             //     url: "./rest/cart",
             //     type: "PUT",
