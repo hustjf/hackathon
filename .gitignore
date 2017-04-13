@@ -1,3 +1,5 @@
 .idea/
 hackathon.iml
 target/
+src/main/resources/META-INF/persistence.xml
+src/main/java/com/oracle/hackathon/dao/a.txt

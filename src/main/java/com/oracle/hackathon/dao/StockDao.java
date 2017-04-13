@@ -15,7 +15,4 @@ public interface StockDao {
     public void delete(List<Stock> stocks);
     public void update(Stock stock);
 
-
-
-
 }
