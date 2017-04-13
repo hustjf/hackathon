@@ -23,18 +23,19 @@ public class Orders implements Serializable {
     private double price;
     private Date time;
     private String address;
-
+    private int orderid;
 
     public Orders() {
     }
 
-    public Orders(int id, String name, int count, double price, Date time, String address) {
+    public Orders(int id, String name, int count, double price, Date time, String address, int orderid) {
         this.id = id;
         this.name = name;
         this.count = count;
         this.price = price;
         this.time = time;
         this.address = address;
+        this.orderid = orderid;
     }
 
     public int getId() {
@@ -83,5 +84,13 @@ public class Orders implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(int orderid) {
+        this.orderid = orderid;
     }
 }
