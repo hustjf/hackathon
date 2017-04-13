@@ -57,13 +57,15 @@ public class OrdersControl {
     public Response addData(List<Cart> carts) {
 
         List<Orders> orders = new ArrayList<Orders>();
+        String orderid = String.valueOf(System.currentTimeMillis());
+
         for(int i=0;i<carts.size();i++) {
             Cart cart = carts.get(i);
             Orders order = new Orders();
             order.setCount(cart.getCount());
             order.setId(cart.getId());
             order.setName(cart.getName());
-            order.setOrderid(cart.getOrderid());
+            order.setOrderid(orderid);
             order.setTime(new Date());
             order.setPrice(cart.getPrice());
             orders.add(order);

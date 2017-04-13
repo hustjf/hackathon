@@ -22,12 +22,12 @@ public class Orders implements Serializable {
     private int count;
     private double price;
     private Date time;
-    private int orderid;
+    private String orderid;
 
     public Orders() {
     }
 
-    public Orders(int id, String name, int count, double price, Date time, int orderid) {
+    public Orders(int id, String name, int count, double price, Date time, String orderid) {
         this.id = id;
         this.name = name;
         this.count = count;
@@ -76,11 +76,11 @@ public class Orders implements Serializable {
         this.time = time;
     }
 
-    public int getOrderid() {
+    public String getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(int orderid) {
+    public void setOrderid(String orderid) {
         this.orderid = orderid;
     }
 }
