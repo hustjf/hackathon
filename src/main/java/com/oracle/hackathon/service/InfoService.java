@@ -31,4 +31,8 @@ public class InfoService {
     public void deleteInfo(List<Info> infos) {
         infoDao.delete(infos);
     }
+
+    public Info getById(int id) {
+        return infoDao.findById(id);
+    }
 }

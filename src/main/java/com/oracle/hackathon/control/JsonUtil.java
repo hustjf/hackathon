@@ -29,11 +29,21 @@ public class JsonUtil {
         //jsonUtil.deleteFile(jsonUtil.getFilePath());
         //jsonUtil.createFile(jsonUtil.getFilePath());
         //jsonUtil.listToJson(stocksService.findAll());
-        //jsonUtil.writeFile();
+        jsonUtil.writeFile();
     }
 
     public String getFilePath() {
-        return "/productData.json";
+        String t=Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String[] strs=t.split("/");
+        StringBuilder path=new StringBuilder("");
+        for(String s:strs) {
+            if(s.equals("WEB-INF")) {
+                break;
+            }
+            path.append(s);
+            path.append("/");
+        }
+        return path.toString()+"productData.json";
     }
 
 

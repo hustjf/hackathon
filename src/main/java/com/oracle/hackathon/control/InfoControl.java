@@ -20,11 +20,23 @@ public class InfoControl {
     @Produces("application/json")
     public Response getData() {
 
-        List<Info> ordersList;
+        List<Info> infoList;
 
         try {
-            ordersList = infoService.findAll();
-            GenericEntity<List<Info>> entity = new GenericEntity<List<Info>>(ordersList){};
+            infoList = infoService.findAll();
+            GenericEntity<List<Info>> entity = new GenericEntity<List<Info>>(infoList){};
+            return Response.status(Response.Status.OK).entity(entity).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Produces("application/json")
+    public Response getById(String id) {
+        try {
+            Info info = infoService.getById(Integer.parseInt(id));
+            GenericEntity<Info> entity = new GenericEntity<Info>(info){};
             return Response.status(Response.Status.OK).entity(entity).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
