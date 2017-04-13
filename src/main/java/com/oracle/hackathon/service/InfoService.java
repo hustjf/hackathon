@@ -20,15 +20,15 @@ public class InfoService {
         return infoDao.findById(id);
     }
 
-    public void addStock(Info info) {
+    public void addInfo(Info info) {
         infoDao.add(info);
     }
 
-    public void updateStock(Info info) {
+    public void updateInfo(Info info) {
         infoDao.update(info);
     }
 
-    public void deleteStock(List<Info> infos) {
+    public void deleteInfo(List<Info> infos) {
         infoDao.delete(infos);
     }
 }

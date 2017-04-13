@@ -19,15 +19,15 @@ public class CartService {
         return cartDao.findById(id);
     }
 
-    public void addStock(Cart cart) {
+    public void addCart(Cart cart) {
         cartDao.add(cart);
     }
 
-    public void updateStock(Cart cart) {
+    public void updateCart(Cart cart) {
         cartDao.update(cart);
     }
 
-    public void deleteStock(List<Cart> carts) {
+    public void deleteCart(List<Cart> carts) {
         cartDao.delete(carts);
     }
 

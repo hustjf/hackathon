@@ -38,7 +38,7 @@ public class CartControl {
     @Produces("text/plain")
     public Response addData(Cart cart) {
         try {
-            cartService.addStock(cart);
+            cartService.addCart(cart);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
@@ -58,7 +58,7 @@ public class CartControl {
             double single = price / count;
             count = cart.getCount();
             cart.setPrice(single * count);
-            cartService.updateStock(cart);
+            cartService.updateCart(cart);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
@@ -71,7 +71,7 @@ public class CartControl {
     @Produces("text/plain")
     public Response deleteData(List<Cart> carts) {
         try {
-            cartService.deleteStock(carts);
+            cartService.deleteCart(carts);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

@@ -38,7 +38,7 @@ public class InfoControl {
     @Produces("text/plain")
     public Response addData(Info info) {
         try {
-            infoService.addStock(info);
+            infoService.addInfo(info);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
@@ -51,7 +51,7 @@ public class InfoControl {
     @Produces("text/plain")
     public Response updateData(Info info) {
         try {
-            infoService.updateStock(info);
+            infoService.updateInfo(info);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
@@ -64,7 +64,7 @@ public class InfoControl {
     @Produces("text/plain")
     public Response deleteData(List<Info> infos) {
         try {
-            infoService.deleteStock(infos);
+            infoService.deleteInfo(infos);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
