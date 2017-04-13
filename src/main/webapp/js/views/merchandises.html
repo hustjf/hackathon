@@ -132,7 +132,7 @@
                             <div class="oj-flex">
                                 <div class="oj-lg-9 oj-md-9 oj-sm-12 oj-flex-item">
                                     <div>
-                                        <div><h4><a href="javascript:void(0);" onclick="forwardtoDetail()" data-bind="text: TITLE" id="href"></a></h4></div>
+                                        <div><h4><a href="javascript:void(0);" data-bind="clicktext: TITLE" id="href"></a></h4></div>
                                         <!--<div><h4><a href="?root=detail&title=" data-bind="text: TITLE" id="href"></a></h4></div>-->
                                     </div>
                                     <div>
@@ -178,7 +178,7 @@
                                             </div>
                                         </div>
                                         <div style="padding: 5px 0">
-                                            <button id="button" + $itemContext.index data-bind="click: $parent.addtocart, ojComponent: { component: 'ojButton', label: 'Add to cart'}">
+                                            <button id="button" + $itemContext.index data-bind="click: $parent.forwardtoDetail, ojComponent: { component: 'ojButton', label: 'Add to cart'}">
                                             </button>
                                         
                                         </div>
