@@ -1,60 +1,45 @@
 <!--
  Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  The Universal Permissive License (UPL), Version 1.0
+ headerTemplate: 'header_tmpl'
  -->
 <div class="oj-hybrid-padding">
-    <h3>Dashboard Content Area</h3>
+    <h3>Your All Orders </h3>
+
     <table id="table" summary="Procurement List" aria-label="Procurement Table"
            data-bind="ojComponent: {component: 'ojTable',
                                 data: datasource,
                                 columnsDefault: {sortable: 'none'},
                                 rowTemplate: 'row_tmpl',
-                                columns: [{headerTemplate: 'header_tmpl'},
-                                          {headerText: 'Materialsid',
-                                           field: 'materialsid'},
-                                          {headerText: 'Currentstock',
-                                           field: 'currentstock'},
-                                          {headerText: 'Matname',
-                                           field: 'matname'},
-                                          {headerText: 'Price',
+                                columns: [{headerText: '     '},
+                                          {headerText: 'Goods ID',
+                                           field: 'id'},
+                                          {headerText: 'Order Name',
+                                           field: 'name'},
+                                          {headerText: 'Order Count',
+                                           field: 'count'},
+                                          {headerText: 'Order Price',
                                            field: 'price'},
-                                          {headerText: 'Save',
-                                           field: 'save'},
-                                          {headerText: 'Suk',
-                                           field: 'suk'},
-                                          {headerText: 'Supplier',
-                                           field: 'supplier'},
-                                          {headerText: 'Totalstock',
-                                           field: 'totalstock'},
-                                          {headerText: 'Type',
-                                           field: 'type'},
-                                          {headerText: 'Unit',
-                                           field: 'unit'},]}">
+                                          {headerText: 'Order Time',
+                                           field: 'time'},
+                                          {headerText: 'Order ID',
+                                           field: 'orderid'},]}">
     </table>
-
     <script type="text/html" id="row_tmpl">
         <tr>
-            <td><input type="checkbox" name="checkrow" data-bind="attr: {value: '{materialsid:' + materialsid + ',currentstock:' + currentstock + ',matname:\'' + matname + '\',price:' + price +
-            ',save:' + save + ',suk:\'' + suk + '\',supplier:\'' + supplier + '\',totalstock:' + totalstock + ',type:\'' + type + '\',unit:\'' + unit + '\'}'}"/></td>
-            <td data-bind="text: materialsid">
+            <td><input type="checkbox" name="checkrow" data-bind="attr: {value: '{id:' + id + ',name:\'' + name + '\',count:' + count + ',price:' + price +
+            ',time:\'' + time + '\',orderid:\'' + orderid + '\'}'}"/></td>
+            <td data-bind="text: id">
             </td>
-            <td data-bind="text: currentstock">
+            <td data-bind="text: name">
             </td>
-            <td data-bind="text: matname">
+            <td data-bind="text: count">
             </td>
             <td data-bind="text: price">
             </td>
-            <td data-bind="text: save">
+            <td data-bind="text: time">
             </td>
-            <td data-bind="text: suk">
-            </td>
-            <td data-bind="text: supplier">
-            </td>
-            <td data-bind="text: totalstock">
-            </td>
-            <td data-bind="text: type">
-            </td>
-            <td data-bind="text: unit">
+            <td data-bind="text: orderid">
             </td>
         </tr>
     </script>
@@ -67,25 +52,26 @@
     </script>
 
     <br>
+    <!--
+        <label for="basicSelect">Type  </label>
 
-    <label for="basicSelect">Type  </label>
-    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
-                                                    value: selectval,
-                                                    placeholder: 'None',
-                                                    rootAttributes: {style:'max-width:20em'}}">
-        <option value="IE">Internet Explorer</option>
-        <option value="FF">Firefox</option>
-        <option value="CH">Chrome</option>
-        <option value="OP">Opera</option>
-        <option value="SA">Safari</option>
-    </select>
-
+        <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                                        value: selectval,
+                                                        placeholder: 'None',
+                                                        rootAttributes: {style:'max-width:20em'}}">
+            <option value="IE">Internet Explorer</option>
+            <option value="FF">Firefox</option>
+            <option value="CH">Chrome</option>
+            <option value="OP">Opera</option>
+            <option value="SA">Safari</option>
+        </select>
+        -->
     <button id="button_getdata"
             data-bind="click: button_getdata,
                        ojComponent: { component: 'ojButton', label: 'Get Data' }">
     </button>
 
-
+<!--
     <button id="button_openAddDialog"
             data-bind="click: button_openAddDialog,
                        ojComponent: { component: 'ojButton', label: 'Add Data' }">
@@ -95,12 +81,12 @@
             data-bind="click: button_openUpdateDialog,
                        ojComponent: { component: 'ojButton', label: 'Update Data' }">
     </button>
-
+-->
     <button id="button_deletedata"
             data-bind="click: button_deletedata,
                        ojComponent: { component: 'ojButton', label: 'Delete Data' }">
     </button>
-
+<!--
     <div id="dialogWrapper_add">
         <div style="height:300px;width:500px;display:none" id="addDialog" title="Add Data"
              data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
@@ -220,10 +206,12 @@
                        data-bind="ojComponent: {component: 'ojInputText',
                                   value: updateunit}"/>
             </div>
+
             <div class="oj-dialog-footer">
                 <button id="okUpdateButton" data-bind="click: button_updatedata,
                                         ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
             </div>
+            -->
         </div>
 
     </div>
