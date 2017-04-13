@@ -7,7 +7,7 @@
  */
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojlistview',
         'ojs/ojmodel', 'ojs/ojgauge', 'ojs/ojbutton', 'ojs/ojcheckboxset',
-        'ojs/ojselectcombobox', 'ojs/ojpagingcontrol', 'ojs/ojcollectiontabledatasource', 'ojs/ojpagingtabledatasource'],
+        'ojs/ojselectcombobox', 'ojs/ojpagingcontrol', 'ojs/ojcollectiontabledatasource', 'ojs/ojpagingtabledatasource','ojs/ojdialog'],
  function(oj, ko, $) {
   
     function CustomerViewModel() {
@@ -74,30 +74,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         criteriaMap['reviews'] = {key: 'REVIEWS', direction: 'descending'};
         criteriaMap['date'] = {key: 'PUBLISH_DATE', direction: 'ascending'};
 
-        var filters = ['lt30', '30to40', '40to50', 'gt50', 'five', 'four', 'three', 'two', 'dcoward', 'jbrock', 'hschildt', 'jmanico', 'mnaftalin'];
+        var filters = ['lt100', '100to1000', '1000to5000', 'gt5000', 'five', 'four', 'three', 'two', 'apple', 'dell', 'lenovo', 'hp', 'epson', 'tc', 'md', 'computer', 'printer', 'marker', 'paper'];
 
         var filterFunc = {};
-        filterFunc['lt30'] = function(model) { return (parseFloat(model.get('PRICE')) < 30); };
-        filterFunc['30to40'] = function(model) { return (parseFloat(model.get('PRICE')) > 30 && parseFloat(model.get('PRICE')) < 40); };
-        filterFunc['40to50'] = function(model) { return (parseFloat(model.get('PRICE')) >= 40 && parseFloat(model.get('PRICE')) <= 50); };
-        filterFunc['gt50'] = function(model) { return (parseFloat(model.get('PRICE')) > 50); };
+        filterFunc['lt100'] = function(model) { return (parseFloat(model.get('PRICE')) < 100); };
+        filterFunc['100to1000'] = function(model) { return (parseFloat(model.get('PRICE')) > 100 && parseFloat(model.get('PRICE')) < 1000); };
+        filterFunc['1000to5000'] = function(model) { return (parseFloat(model.get('PRICE')) >= 1000 && parseFloat(model.get('PRICE')) <= 5000); };
+        filterFunc['gt5000'] = function(model) { return (parseFloat(model.get('PRICE')) > 5000); };
 
         filterFunc['five'] = function(model) { return (parseFloat(model.get('RATING')) == 5); };
         filterFunc['four'] = function(model) { return (parseFloat(model.get('RATING')) >= 4); };
         filterFunc['three'] = function(model) { return (parseFloat(model.get('RATING')) >= 3); };
         filterFunc['two'] = function(model) { return (parseFloat(model.get('RATING')) < 3); };
 
-        filterFunc['dcoward'] = function(model) { return (model.get('AUTHOR').indexOf('Danny Coward') > -1); };
-        filterFunc['jbrock'] = function(model) { return (model.get('AUTHOR').indexOf('John Brock') > -1); };
-        filterFunc['jmanico'] = function(model) { return (model.get('AUTHOR').indexOf('Jim Manico') > -1); };
-        filterFunc['hschildt'] = function(model) { return (model.get('AUTHOR').indexOf('Herbert Schildt') > -1); };
-        filterFunc['mnaftalin'] = function(model) { return (model.get('AUTHOR').indexOf('Maurice Naftalin') > -1); };
+        filterFunc['apple'] = function(model) { return (model.get('AUTHOR').indexOf('Apple') > -1); };
+        filterFunc['dell'] = function(model) { return (model.get('AUTHOR').indexOf('Dell') > -1); };
+        filterFunc['lenovo'] = function(model) { return (model.get('AUTHOR').indexOf('Lenovo') > -1); };
+        filterFunc['hp'] = function(model) { return (model.get('AUTHOR').indexOf('HP') > -1); };
+        filterFunc['epson'] = function(model) { return (model.get('AUTHOR').indexOf('EPSON') > -1); };
+        filterFunc['tc'] = function(model) { return (model.get('AUTHOR').indexOf('Touchlitt3') > -1); };
+        filterFunc['md'] = function(model) { return (model.get('AUTHOR').indexOf('M&D') > -1); };
+        
+        filterFunc['computer'] = function(model) { return (model.get('TYPE').indexOf('Computer') > -1); };
+        filterFunc['printer'] = function(model) { return (model.get('TYPE').indexOf('Printer') > -1); };
+        filterFunc['marker'] = function(model) { return (model.get('TYPE').indexOf('Marker') > -1); };
+        filterFunc['paper'] = function(model) { return (model.get('TYPE').indexOf('Paper') > -1); };
 
         var converterFactory = oj.Validation.converterFactory("number");
         var currencyOptions =
             {
                 style: "currency",
-                currency: "USD",
+                currency: "RMB",
                 currencyDisplay:"symbol"
             };
         this.currencyConverter = converterFactory.createConverter(currencyOptions);
@@ -172,6 +179,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 self.dataSource().sort(criteria);
             }
         };
+       
 
 
     }

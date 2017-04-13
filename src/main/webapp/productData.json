@@ -1,122 +1,125 @@
 [
   {
     "ID": 100,
-    "TITLE": "Java: A Beginner's Guide",
-    "AUTHOR": "Herbert Schildt",
+    "TITLE": "Apple MacBook Air",
+    "AUTHOR": "Apple",
     "PUBLISH_DATE": "2014-04-15",
-    "PRICE": 40.00,
+    "PRICE": 6988.00,
     "RATING": 4.5,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 37
+    "IMAGE_URL": "css/images/Apple.jpg",
+    "REVIEWS": 37,
+	"TYPE":"Computer",
+	"SKU":"Core i5, 8GB, 128GB"
   },
   {
     "ID": 101,
-    "TITLE": "Java: The Complete Reference",
-    "AUTHOR": "Herbert Schildt",
-    "PUBLISH_DATE": "2014-03-11",
-    "PRICE": 60.00,
-    "RATING": 4.5,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 27
+    "TITLE": "Xiao Mi Air",
+    "AUTHOR": "Xiao Mi",
+    "PUBLISH_DATE": "2016-08-15",
+    "PRICE": 4999.00,
+    "RATING": 4.6,
+    "IMAGE_URL": "css/images/100-1.jpg",
+    "REVIEWS": 32,
+	"TYPE":"Computer",
+	"SKU":"i5-6200U, 8G, 256G"
   },
   {
     "ID": 102,
-    "TITLE": "Iron-Clad Java: Building Secure Web Applications",
-    "AUTHOR": "Jim Manico, August Detlefsen",
-    "PUBLISH_DATE": "2014-09-12",
-    "PRICE": 40.00,
-    "RATING": 5,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 9
+    "TITLE": "DELL 7000 R1605S",
+    "AUTHOR": "Dell",
+    "PUBLISH_DATE": "2014-04-15",
+    "PRICE": 5199.00,
+    "RATING": 4.1,
+    "IMAGE_URL": "css/images/101-1.jpg",
+    "REVIEWS": 39,
+	"TYPE":"Computer",
+	"SKU":"i5-7200U, 8G, 256GSSD"
   },
   {
     "ID": 103,
-    "TITLE": "Mastering Lambdas: Java Programming in a Multicore World",
-    "AUTHOR": "Maurice Naftalin",
-    "PUBLISH_DATE": "2014-10-13",
-    "PRICE": 40.00,
-    "RATING": 5,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 4
+    "TITLE": "DELL 15PR-2648B",
+    "AUTHOR": "Dell",
+    "PUBLISH_DATE": "2014-04-15",
+    "PRICE": 5499.00,
+    "RATING": 4.2,
+    "IMAGE_URL": "css/images/102-1.jpg",
+    "REVIEWS": 38,
+	"TYPE":"Computer",
+	"SKU":"i5-6300HQ, 4G, 128SSD+500G"
   },
   {
-    "ID": 104,
-    "TITLE": "Java EE and HTML5 Enterprise Application Development",
-    "AUTHOR": "John Brock, Arun Gupta",
-    "PUBLISH_DATE": "2014-03-25",
-    "PRICE": 35.00,
-    "RATING": 4,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 9
+    "ID": 200,
+    "TITLE": "HP LaserJet Pro M1136",
+    "AUTHOR": "HP",
+    "PUBLISH_DATE": "2014-04-15",
+    "PRICE": 1159.00,
+    "RATING": 2.5,
+    "IMAGE_URL": "css/images/106-1.jpg",
+    "REVIEWS": 32,
+	"TYPE":"Printer",
+	"SKU":"USB, A4"
   },
   {
-    "ID": 105,
-    "TITLE": "Java EE 7: The Big Picture",
-    "AUTHOR": "Danny Coward",
-    "PUBLISH_DATE": "2014-10-01",
-    "PRICE": 50.00,
-    "RATING": 4,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 1
+    "ID": 201,
+    "TITLE": "HP LaserJet Pro M1216nfh",
+    "AUTHOR": "HP",
+    "PUBLISH_DATE": "2014-04-15",
+    "PRICE": 1799.00,
+    "RATING": 2.8,
+    "IMAGE_URL": "css/images/106-1.jpg",
+    "REVIEWS": 28,
+	"TYPE":"Printer",
+	"SKU":"USB, A4"
+	
   },
   {
-    "ID": 106,
-    "TITLE": "Oracle Fusion Middleware 11g Architecture and Management",
-    "AUTHOR": "Reza Shafii, Stephen Lee",
-    "PUBLISH_DATE": "2011-06-06",
-    "PRICE": 60.00,
-    "RATING": 4.5,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 7
+    "ID": 202,
+    "TITLE": "EPSON L565",
+    "AUTHOR": "EPSON",
+    "PUBLISH_DATE": "2014-04-15",
+    "PRICE": 1749.00,
+    "RATING": 2.8,
+    "IMAGE_URL": "css/images/107-1.jpg",
+    "REVIEWS": 28,
+	"TYPE":"Printer",
+	"SKU":"Wireless, A4"
+  },
+    {
+    "ID": 203,
+    "TITLE": "EPSON L360",
+    "AUTHOR": "HP",
+    "PUBLISH_DATE": "2014-04-15",
+    "PRICE": 999.00,
+    "RATING": 2.9,
+    "IMAGE_URL": "css/images/107-1.jpg",
+    "REVIEWS": 32,
+	"TYPE":"Printer",
+	"SKU":"USB, A4"
   },
   {
-    "ID": 107,
-    "TITLE": "Mastering JavaFX 8 Controls",
-    "AUTHOR": "Hendrik Ebbers",
-    "PUBLISH_DATE": "2014-07-07",
-    "PRICE": 35.00,
-    "RATING": 4,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 10
+    "ID": 301,
+    "TITLE": "FineColour",
+    "AUTHOR": "M&D",
+    "PUBLISH_DATE": "2014-04-15",
+    "PRICE": 79.00,
+    "RATING": 2.9,
+    "IMAGE_URL": "css/images/marker-1.jpg",
+    "REVIEWS": 24,
+	"TYPE":"Marker",
+	"SKU":"double head,40 colors"
   },
-  {
-    "ID": 108,
-    "TITLE": "Java WebSocket Programming",
-    "AUTHOR": "Danny Coward",
-    "PUBLISH_DATE": "2013-09-18",
-    "PRICE": 40.00,
-    "RATING": 4,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 9
-  },
-  {
-    "ID": 109,
-    "TITLE": "Oracle Fusion Developer Guide: Buidling Rich Internet Applications with Oracle ADF Business Components",
-    "AUTHOR": "Frank Nimphius",
-    "PUBLISH_DATE": "2009-12-11",
-    "PRICE": 65.00,
-    "RATING": 3.5,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 9
-  },
-  {
-    "ID": 110,
-    "TITLE": "Designing an IAM Framework with Oracle Identity and Access Management",
-    "AUTHOR": "Jeff Scheidel",
-    "PUBLISH_DATE": "2010-07-26",
-    "PRICE": 49.99,
-    "RATING": 4,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 9
-  },
-  {
-    "ID": 111,
-    "TITLE": "Java Programming",
-    "AUTHOR": "Poornachandra Sarang",
-    "PUBLISH_DATE": "2012-01-20",
-    "PRICE": 50.00,
-    "RATING": 4,
-    "IMAGE_URL": "css/images/IT.png",
-    "REVIEWS": 15
+    {
+    "ID": 302,
+    "TITLE": "Sunflower",
+    "AUTHOR": "Touchlitt3",
+    "PUBLISH_DATE": "2014-04-15",
+    "PRICE": 115.00,
+    "RATING": 3.8,
+    "IMAGE_URL": "css/images/marker-2.jpg",
+    "REVIEWS": 36,
+	"TYPE":"Marker",
+	"SKU":"one head,60 colors"
   }
-]
+  
+  
+  ]

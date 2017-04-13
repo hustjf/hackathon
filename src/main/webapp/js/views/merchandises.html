@@ -15,70 +15,79 @@
           component: 'ojCheckboxset',
           value: currentPrice, rootAttributes: {style: 'padding-bottom: 15px'}, optionChange: handleFilterChanged}" >
         <span class="oj-choice-item">
-            <input id="price_opt1" type="checkbox" value="lt30">
-            <label for="price_opt1">Less than $30</label>
+            <input id="price_opt1" type="checkbox" value="lt100">
+            <label for="price_opt1">Less than 100</label>
         </span>
                     <span class="oj-choice-item">
-            <input id="price_opt2" type="checkbox" value="30to40">
-            <label for="price_opt2">$30 - $39.99</label>
+            <input id="price_opt2" type="checkbox" value="100to1000">
+            <label for="price_opt2">100 - 1000</label>
         </span>
                     <span class="oj-choice-item">
-            <input id="price_opt3" type="checkbox" value="40to50">
-            <label for="price_opt3">$40 - $50</label>
+            <input id="price_opt3" type="checkbox" value="1000to5000">
+            <label for="price_opt3">1000 - 5000</label>
         </span>
                     <span class="oj-choice-item">
-            <input id="price_opt4" type="checkbox" value="gt50">
-            <label for="price_opt4">Greater than $50</label>
+            <input id="price_opt4" type="checkbox" value="gt5000">
+            <label for="price_opt4">Greater than 5000</label>
         </span>
                 </div>
 
-                <label id="author_filter_lbl">Supplier</label>
-                <div id="author_filter" aria-labelledby="author_filter_lbl"
+                <label id="supplier_filter_lbl">Supplier</label>
+                <div id="supplier_filter" aria-labelledby="author_filter_lbl"
                      data-bind="ojComponent: {
           component: 'ojCheckboxset',
           value: currentAuthor, rootAttributes: {style: 'padding-bottom: 15px'}, optionChange: handleFilterChanged}" >
           <span class="oj-choice-item">
-              <input id="dcoward" type="checkbox" value="dcoward">
-              <label for="dcoward">Danny Coward</label>
+              <input id="apple" type="checkbox" value="apple">
+              <label for="apple">Apple</label>
           </span>
                     <span class="oj-choice-item">
-              <input id="hschildt" type="checkbox" value="hschildt">
-              <label for="hschildt">Herbert Schildt</label>
+              <input id="dell" type="checkbox" value="dell">
+              <label for="dell">Dell</label>
           </span>
                     <span class="oj-choice-item">
-              <input id="jmanico" type="checkbox" value="jmanico">
-              <label for="jmanico">Jim Manico</label>
+              <input id="lenovo" type="checkbox" value="lenovo">
+              <label for="lenovo">Lenovo</label>
           </span>
                     <span class="oj-choice-item">
-              <input id="jbrock" type="checkbox" value="jbrock">
-              <label for="jbrock">John Brock</label>
+              <input id="hp" type="checkbox" value="hp">
+              <label for="hp">HP</label>
           </span>
                     <span class="oj-choice-item">
-              <input id="mnaftalin" type="checkbox" value="mnaftalin">
-              <label for="mnaftalin">Maurice Naftalin</label>
+              <input id="espon" type="checkbox" value="epson">
+              <label for="epson">EPSON</label>
           </span>
+                    <span class="oj-choice-item">
+              <input id="tc" type="checkbox" value="tc">
+              <label for="tc">Touchlitt3</label>
+          </span>
+                    <span class="oj-choice-item">
+              <input id="md" type="checkbox" value="md">
+              <label for="md">M&D</label>
+          </span>
+                
                 </div>
 
-                <label id="rating_filter_lbl">Type</label>
-                <div id="rating_filter" aria-labelledby="rating_filter_lbl"
+                <label id="type_filter_lbl">Type</label>
+                <div id="type_filter" aria-labelledby="type_filter_lbl"
                      data-bind="ojComponent: {
           component: 'ojCheckboxset',
           value: currentRating, rootAttributes: {style: 'padding-bottom: 15px'}, optionChange: handleFilterChanged}" >
           <span class="oj-choice-item">
-              <input id="fivestars" type="checkbox" value="five">
-              <label for="fivestars">5 Stars</label>
+              <input id="computer" type="checkbox" value="computer">
+              <label for="computer">Computer</label>
           </span>
                     <span class="oj-choice-item">
-              <input id="fourstars" type="checkbox" value="four">
-              <label for="fourstars">4 or More Stars</label>
+              <input id="printer" type="checkbox" value="printer">
+              <label for="printer">Printer</label>
           </span>
                     <span class="oj-choice-item">
-              <input id="threestars" type="checkbox" value="three">
-              <label for="threestars">3 or More Stars</label>
+              <input id="marker" type="checkbox" value="marker">
+              <label for="marker">Marker</label>
           </span>
                     <span class="oj-choice-item">
-              <input id="twostars" type="checkbox" value="two">
-              <label for="twostars">Less than 3 Stars</label>
+              <input id="paper" type="checkbox" value="paper">
+              <label for="paper">Paper</label>
           </span>
                 </div>
 
@@ -126,16 +135,16 @@
                                         <div><h4><a href="?root=detail&title=" data-bind="text: TITLE"></a></h4></div>
                                     </div>
                                     <div>
-                                        <div><span>By <a href="#" data-bind="text: AUTHOR"></a></span></div>
+                                        <div><span>Supported by <a href="#" data-bind="text: AUTHOR"></a></span></div>
                                     </div>
 
                                     <div class="oj-flex">
                                         <div class="oj-lg-12 oj-md-12 oj-sm-only-hide oj-flex-item" style="padding:0">
                                             <div class="sku-model">
                                                 <ul>
-                                                    <li><span class="label">SKU:</span> <span data-bind="text: ID"></span></li>
+                                                    <li><span class="label">SKU:</span> <span data-bind="text: SKU"></span></li>
                                                     <li><span class="label">Release Date:</span> <span data-bind="text: PUBLISH_DATE"></span></li>
-                                                    <li><span class="label">Format:</span> <span>Paperback</span></li>
+                                                    <li><span class="label">Type:</span> <span data-bind="text: TYPE"></span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -154,11 +163,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="oj-flex">
+                                    <!--div class="oj-flex">
                                         <div class="oj-lg-12 oj-md-12 oj-sm-only-hide oj-flex-item" style="padding:10px 0">
                                             <a class="sku-model" href="#">Check Shipping &amp; Availability</a>
                                         </div>
-                                    </div>
+                                    </div-->
                                 </div>
                                 <div class="oj-lg-3 oj-md-3 oj-sm-12 oj-flex-item">
                                     <div>
@@ -170,15 +179,16 @@
                                         <div style="padding: 5px 0">
                                             <button id="button" + $itemContext.index data-bind="ojComponent: { component: 'ojButton', label: 'Add to cart'}">
                                             </button>
+                                        
                                         </div>
                                     </div>
                                     <div class="oj-flex">
                                         <div class="oj-lg-12 oj-md-12 oj-sm-only-hide oj-flex-item" style="padding:0">
-                                            <div class="offers">
+                                            <!--div class="offers">
                                                 <ul>
-                                                    <li><a href="#">Free Shipping on Orders $35 and Up</a></li>
+                                                    <li><a href="#">Free Shipping on Orders 35 and Up</a></li>
                                                 </ul>
-                                            </div>
+                                            </div-->
                                         </div>
                                     </div>
                                 </div>
