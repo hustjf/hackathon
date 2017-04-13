@@ -51,6 +51,13 @@ public class CartControl {
     @Produces("text/plain")
     public Response updateData(Cart cart) {
         try {
+            int id = cart.getId();
+            Cart ori = cartService.findById(id);
+            int count = ori.getCount();
+            double price = ori.getPrice();
+            double single = price / count;
+            count = cart.getCount();
+            cart.setPrice(single * count);
             cartService.updateStock(cart);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {

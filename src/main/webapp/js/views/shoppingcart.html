@@ -3,95 +3,110 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 <div class="oj-hybrid-padding">
-  <h3>Incidents Content Area</h3>
-
-  <table align="center" class="nobg" width="100%"><tbody><tr>
-	<td style="text-align: center;" width="20%">
-	<p style="text-align: center;">
-	<a href="#IT Equipment" style="letter-spacing: 0px; line-height: 1.5;">
-	<img alt="IT Equipment" src="css/images/IT.png" style="width: 120px; height: 120px;">
-	<br>IT Equipment</a></p>
-	</td>
-	
-	<td style="text-align: center;" width="20%">
-	<p style="text-align: center;">
-	<a href="#BO" style="letter-spacing: 0px; line-height: 1.5;">
-	<img alt="BO" src="css/images/BO.png" style="width: 120px; height: 120px;">
-	<br>Books</a>
-	</td>
-	
-	<td style="text-align: center;" width="20%">
-	<p style="text-align: center;">
-	<a href="#MA" style="letter-spacing: 0px; line-height: 1.5;">
-	<img alt="MA" src="css/images/MA.png" style="width: 120px; height: 120px;">
-	<br>Marker/Display Board</a>
-	</td>
-	
-	</tr><table align="center" class="nobg" width="100%"><tbody><tr>
-	<td style="text-align: center;" width="20%">
-	<p style="text-align: center;">
-	<a href="#OF" style="letter-spacing: 0px; line-height: 1.5;">
-	<img alt="OF" src="css/images/OF.png" style="width: 120px; height: 120px;">
-	<br>Office Supply</a>
-	</td>
-	
-	<td style="text-align: center;" width="20%">
-	<p style="text-align: center;">
-	<a href="#PA" style="letter-spacing: 0px; line-height: 1.5;">
-	<img alt="PA" src="css/images/PA.png" style="width: 120px; height: 120px;">
-	<br>Paper Products</a>
-	</td>
-	
-	<td style="text-align: center;" width="20%">
-	<p style="text-align: center;">
-	<a href="#PR" style="letter-spacing: 0px; line-height: 1.5;">
-	<img alt="PR" src="css/images/PR.png" style="width: 120px; height: 120px;">
-	<br>Printing/Copying</a>
-	</tr></tbody></table>
-	
-	<br><br><br><br>
-
-    <table id="table" summary="Procurement List" aria-label="Procurement Table"
-           data-bind="ojComponent: {component: 'ojTable',
+	<table id="table" summary="Procurement List" aria-label="Procurement Table"
+		   data-bind="ojComponent: {component: 'ojTable',
                                 data: datasource,
                                 columnsDefault: {sortable: 'none'},
-                                columns: [{headerText: 'Metname'     , field: 'metname'},
-                                          {headerText: 'MaterialsID'   , field: 'materialsid'},
-                                          {headerText: 'Unit'    , field: 'unit'},
-                                          {headerText: 'Sku'   , field: 'sku'},
-                                          {headerText: 'Price'   , field: 'price'},
-                                          {headerText: 'Supplier', field: 'supplier'},
-										  {headerText: 'More actions'        , field: 'operations'}],
-							    rowTemplate: 'row_template'}">
-    </table>
+                                rowTemplate: 'row_tmpl',
+                                columns: [{headerTemplate: 'header_tmpl'},
+                                          {headerText: 'ID',
+                                           field: 'id'},
+                                          {headerText: 'Name',
+                                           field: 'name'},
+                                          {headerText: 'Count',
+                                           field: 'count'},
+                                          {headerText: 'Type',
+                                           field: 'type'},
+                                          {headerText: 'Price',
+                                           field: 'price'},]}">
+	</table>
 
-	<script type="text/html" id="row_template">
-	  <tr>
-		<td data-bind="text: $data.metname      ? metname      : metname"></td>
-		<td data-bind="text: $data.materialsid  ? materialsid    : materialsid"></td>
-		<td data-bind="text: $data.unit         ? unit         : unit"></td>
-		<td data-bind="text: $data.sku          ? sku          : sku"></td>
-		<td data-bind="text: $data.price        ? price        : price"></td>
-		<td data-bind="text: $data.supplier     ? supplier     : supplier"></td>
-		<td>
-		  <button data-bind="click: function() {$parent.View(_id)}, ojComponent: {component: 'ojButton', label: 'View stock'}"></button>
-		  <button data-bind="click: function() {$parent.Contact($parent, _id)}, ojComponent: {component: 'ojButton', label: 'Contact supplier'}"></button>
-		  <button data-bind="click: function() {$parent.Purchase(_id)}, ojComponent: {component: 'ojButton', label: 'Purchase'}"></button>
-		  <button data-bind="click: function() {$parent.Use($parent, _id)}, ojComponent: {component: 'ojButton', label: 'Use'}"></button>
-		</td>
-	  </tr>
+	<script type="text/html" id="row_tmpl">
+		<tr>
+			<td><input type="checkbox" name="checkrow" data-bind="attr: {value: '{id:' + id + ',name:\'' + name + '\',count:' + count + ',type:\'' + type +
+            '\',price:' + price + '}'}"/></td>
+			<td data-bind="text: id">
+			</td>
+			<td data-bind="text: name">
+			</td>
+			<td data-bind="text: count">
+			</td>
+			<td data-bind="text: type">
+			</td>
+			<td data-bind="text: price">
+			</td>
+
+		</tr>
 	</script>
-	
-	<br><br><br><br>
-	
-    <table id="table1" summary="Procurement List" aria-label="Procurement Table"
-           data-bind="ojComponent: {component: 'ojTable',
-                                data: datasource1,
-                                columnsDefault: {sortable: 'none'},
-                                columns: [{headerText: 'Supplier name'  , field: 'supplier'},
-										  {headerText: 'Phone'          , field: 'phone'},
-                                          {headerText: 'Email'          , field: 'email'},
-                                          {headerText: 'Contact person' , field: 'contact'}],}">
-    </table>
+
+	<script type="text/html" id="header_tmpl">
+		<tr>
+			<td><input type="checkbox" id="checkall"/></td>
+
+		</tr>
+	</script>
+
+	<br>
+
+
+
+	<button id="button_openUpdateDialog"
+			data-bind="click: button_openUpdateDialog,
+                       ojComponent: { component: 'ojButton', label: 'Update Count' }">
+	</button>
+
+	<button id="button_deletedata"
+			data-bind="click: button_deletedata,
+                       ojComponent: { component: 'ojButton', label: 'Delete Goods' }">
+	</button>
+
+	<button id="button_submit"
+			data-bind="click: button_submit,
+                       ojComponent: { component: 'ojButton', label: 'Submit' }">
+	</button>
+
+
+	<div id="dialogWrapper_update">
+		<div style="height:300px;width:500px;display:none" id="updateDialog" title="Update Data"
+			 data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+			<div class="oj-dialog-body">
+				<label for="input_updateid">ID</label>
+				<input id="input_updateid"
+					   type="text"
+					   data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updateid,
+                                  disabled: true}"/>
+				<label for="input_updatename">Name</label>
+				<input id="input_updatename"
+					   type="text"
+					   data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatename,
+                                  disabled: true}"/>
+				<label for="input_updatecount">Count</label>
+				<input id="input_updatecount"
+					   type="text"
+					   data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatecount}"/>
+				<label for="input_updatetype">Type</label>
+				<input id="input_updatetype"
+					   type="text"
+					   data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updateprice,
+                                  disabled: true}"/>
+				<label for="input_updateprice">Price</label>
+				<input id="input_updateprice"
+					   type="text"
+					   data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updateprice,
+                                  disabled: true}"/>
+
+			</div>
+			<div class="oj-dialog-footer">
+				<button id="okUpdateButton" data-bind="click: button_updatedata,
+                                        ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
+			</div>
+		</div>
+
+	</div>
 
 </div>

@@ -5,7 +5,7 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton', 'ojs/ojdialog', 'ojs/ojinputtext', 'ojs/ojselectcombobox'],
  function(oj, ko, $) {
   
     function IncidentsViewModel() {
@@ -65,26 +65,147 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
       self.handleDetached = function(info) {
         // Implement if needed
       };
-	  
-			
-        var dataArray1 = [
-			{supplier: 'met', phone: 699, email: '**@qq.com', contact: 'p1'},
-			{supplier: 'met', phone: 699, email: '**@qq.com', contact: 'p1'},
-			{supplier: 'met', phone: 699, email: '**@qq.com', contact: 'p1'},
-			{supplier: 'met', phone: 699, email: '**@qq.com', contact: 'p1'}];
 
-        self.datasource1 = new oj.ArrayTableDataSource(dataArray1, {idAttribute: 'supplier'});
-		
-        var dataArray = [
-			{metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo"},
-            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo",materialID:"2016311"},
-            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo",materialID:"2016312"},
-            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo",materialID:"2017316"},
-            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo",materialID:"2017318"},
-            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo"},
-            {metname: 'met', materialsid: 699, unit: 1, sku: 'IPhone', price: 699, supplier: "Lenovo"}];
+        self.datasource = null;
 
-        self.datasource = new oj.ArrayTableDataSource(dataArray, {idAttribute: 'sku'});
+        $.ajax({
+            url: "./rest/cart",
+            type: "GET",
+            data: {},
+            dataType: "",
+            success: function (response, textStatus) {
+                self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'id'});
+                $('#table').ojTable({"data" : self.datasource});
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+            }
+        });
+
+        self.updateid = "";
+        self.updatename = "";
+        self.updatecount = "";
+        self.updatetype = "";
+        self.updateprice = "";
+
+
+        self.button_getdata = function(data, event){
+            $.ajax({
+                url: "./rest/cart",
+                type: "GET",
+                data: {},
+                dataType: "",
+                success: function (response, textStatus) {
+                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'id'});
+                    $('#table').ojTable({"data" : self.datasource});
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return true;
+        };
+
+
+        self.button_openUpdateDialog = function(data, event){
+            var checkedArray = self.findChecked();
+            if (checkedArray.length != 1) {
+                alert("Please select only one data to update!");
+                return;
+            }
+
+            var val = eval('(' + checkedArray[0] + ')');
+            $('#input_updateid').ojInputText({"value" : val["id"]});
+            $('#input_updatename').ojInputText({"value" : val["name"]});
+            $('#input_updatecount').ojInputText({"value" : val["count"]});
+            $('#input_updatetype').ojInputText({"value" : val["type"]});
+            $('#input_updateprice').ojInputText({"value" : val["price"]});
+
+            self.updateid = val["id"];
+            self.updatename = val["name"];
+            self.updatecount = val["count"];
+            self.updatetype = val["type"];
+            self.updateprice = val["price"];
+            $("#updateDialog").ojDialog("open");
+            return true;
+        };
+
+        self.button_updatedata = function(data, event){
+            $.ajax({
+                url: "./rest/cart",
+                type: "PUT",
+                data: JSON.stringify({id: self.updateid, name: self.updatename, count: self.updatecount, type: self.updatetype, price: self.updateprice}),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("Update Success!");
+                    self.button_getdata();
+                    $("#updateDialog").ojDialog("close");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return true;
+        };
+
+        self.findChecked = function() {
+            var selectedArray = [];
+            $("input:checkbox").each(function() {
+                var $this = $(this);
+                if ($this.is(":checked")) {
+                    // alert($this.attr("value"));
+                    selectedArray.push($this.attr("value"));
+                }
+            });
+            return selectedArray;
+        };
+
+        self.button_deletedata = function(data, event){
+            var checkedArray = self.findChecked();
+            if (checkedArray.length == 0) {
+                alert("Please select at least one data to delete!");
+                return;
+            }
+            var jsonArray = [];
+            for (var i = 0; i < checkedArray.length; ++i) {
+                jsonArray.push(eval('(' + checkedArray[i] + ')'));
+            }
+            $.ajax({
+                url: "./rest/cart",
+                type: "DELETE",
+                data: JSON.stringify(jsonArray),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("Delete Success!");
+                    self.button_getdata();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return true;
+        };
+
+        self.button_submit = function(data, event){
+            // $.ajax({
+            //     url: "./rest/cart",
+            //     type: "PUT",
+            //     data: JSON.stringify({id: self.updateid, name: self.updatename, count: self.updatecount, type: self.updatetype, price: self.updateprice}),
+            //     dataType: "",
+            //     contentType: "application/json",
+            //     success: function (response, textStatus) {
+            //         alert("Update Success!");
+            //         self.button_getdata();
+            //         $("#updateDialog").ojDialog("close");
+            //     },
+            //     error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //         alert(XMLHttpRequest.responseText);
+            //     }
+            // });
+            return true;
+        };
 			
 
     }
