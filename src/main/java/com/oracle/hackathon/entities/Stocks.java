@@ -21,6 +21,8 @@ public class Stocks implements Serializable {
     private double price;
     private String suk;
     private String supplier;
+    private String image;
+
 
     public Stocks() {
     }

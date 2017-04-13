@@ -20,15 +20,15 @@ public class OrdersService {
         return ordersDao.findById(id);
     }
 
-    public void addStock(Orders order) {
-        ordersDao.add(order);
+    public void addOrder(List<Orders> orders) {
+        ordersDao.add(orders);
     }
 
-    public void updateStock(Orders order) {
+    public void updateOrder(Orders order) {
         ordersDao.update(order);
     }
 
-    public void deleteStock(List<Orders> orders) {
+    public void deleteOrder(List<Orders> orders) {
         ordersDao.delete(orders);
     }
 }
