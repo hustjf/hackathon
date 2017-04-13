@@ -70,18 +70,19 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontr
       self.price = "$999";
       self.supplier = "apple";
       self.description = "hahaha";
-        // $.ajax({
-        //     url: "./rest/info",
-        //     type: "GET",
-        //     data: {},
-        //     dataType: "",
-        //     success: function (response, textStatus) {
-        //
-        //     },
-        //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //         alert(XMLHttpRequest.responseText);
-        //     }
-        // });
+        $.ajax({
+            url: "./rest/info",
+            type: "GET",
+            data: {},
+            dataType: "",
+            success: function (response, textStatus) {
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+            }
+        });
+
     }
 
     /*
