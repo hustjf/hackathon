@@ -113,6 +113,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             idAttribute: 'ID'
         });
 
+        $.ajax({
+            url: "./rest/stocks",
+            type: "GET",
+            data: {},
+            dataType: "",
+            success: function (response, textStatus) {
+                alert(response);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+            }
+        });
+
         this.collection = new oj.Collection(null, {
             url: 'productData.json',
             model: model
