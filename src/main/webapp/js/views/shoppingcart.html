@@ -24,7 +24,7 @@
 	<script type="text/html" id="row_tmpl">
 		<tr>
 			<td><input type="checkbox" name="checkrow" data-bind="attr: {value: '{id:' + id + ',name:\'' + name + '\',count:' + count + ',type:\'' + type +
-            '\',price:' + price + '}'}"/></td>
+            '\',price:' + price + ',orderid:' + orderid + '}'}"/></td>
 			<td data-bind="text: id">
 			</td>
 			<td data-bind="text: name">
@@ -60,13 +60,6 @@
                        ojComponent: { component: 'ojButton', label: 'Delete Goods' }">
 	</button>
 
-	<br>
-
-	<label for="text-input">Address</label>
-	<input id="text-input"
-		   type="text"
-		   data-bind="ojComponent: {component: 'ojInputText',
-                                  value: address}"/>
 
 	<button id="button_submit"
 			data-bind="click: button_submit,
