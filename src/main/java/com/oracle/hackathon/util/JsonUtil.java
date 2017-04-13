@@ -46,13 +46,12 @@ public class JsonUtil {
     @GET
     @Produces("text/plain")
     public Response writeFile() {
-
-        String filepath = getFilePath();
-        String string = listToJson(stocksService.findAll());
-        File file=new File(filepath);
-        byte bt[] = new byte[1024];
-        bt = string.getBytes();
         try {
+            String filepath = getFilePath();
+            String string = listToJson(stocksService.findAll());
+            File file=new File(filepath);
+            byte bt[] = new byte[1024];
+            bt = string.getBytes();
             FileOutputStream in = new FileOutputStream(file);
             in.write(bt, 0, bt.length);
             in.close();

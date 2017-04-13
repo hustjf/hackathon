@@ -39,25 +39,24 @@ public class CartControl {
     @Produces("text/plain")
     public Response addData(String id) {
 
-        Stocks stock = stocksService.findById(Integer.parseInt(id));
-        stock.setCount(stock.getCount()-1);
-        stocksService.updateStock(stock);
-
-        Cart cart = cartService.findById(Integer.parseInt(id));
-        if(cart == null) {
-            cart = new Cart();
-            cart.setId(stock.getId());
-            cart.setPrice(stock.getPrice());
-            cart.setName(stock.getName());
-            cart.setType(stock.getType());
-            cart.setCount(1);
-            cartService.addCart(cart);
-        } else {
-            cart.setCount(cart.getCount()+1);
-            cartService.updateCart(cart);
-        }
-
         try {
+            Stocks stock = stocksService.findById(Integer.parseInt(id));
+            stock.setCount(stock.getCount()-1);
+            stocksService.updateStock(stock);
+
+            Cart cart = cartService.findById(Integer.parseInt(id));
+            if(cart == null) {
+                cart = new Cart();
+                cart.setId(stock.getId());
+                cart.setPrice(stock.getPrice());
+                cart.setName(stock.getName());
+                cart.setType(stock.getType());
+                cart.setCount(1);
+                cartService.addCart(cart);
+            } else {
+                cart.setCount(cart.getCount()+1);
+                cartService.updateCart(cart);
+            }
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
