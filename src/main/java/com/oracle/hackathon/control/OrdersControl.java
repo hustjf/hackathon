@@ -44,7 +44,6 @@ public class OrdersControl {
     public Response addData(List<Cart> carts) {
 
         List<Orders> orders = new ArrayList<Orders>();
-
         for(int i=0;i<carts.size();i++) {
             Cart cart = carts.get(i);
             Orders order = new Orders();
@@ -57,7 +56,6 @@ public class OrdersControl {
             orders.add(order);
 
         }
-
         try {
             ordersService.addOrder(orders);
             return Response.status(Response.Status.OK).build();

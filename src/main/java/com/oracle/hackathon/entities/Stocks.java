@@ -22,12 +22,14 @@ public class Stocks implements Serializable {
     private String suk;
     private String supplier;
     private String image;
+    private double rating;
+    private int reviews;
 
 
     public Stocks() {
     }
 
-    public Stocks(int id, String name, int count, String type, double price, String suk, String supplier) {
+    public Stocks(int id, String name, int count, String type, double price, String suk, String supplier, String image, double rating, int reviews) {
         this.id = id;
         this.name = name;
         this.count = count;
@@ -35,6 +37,7 @@ public class Stocks implements Serializable {
         this.price = price;
         this.suk = suk;
         this.supplier = supplier;
+        this.image = image;
     }
 
 
@@ -92,5 +95,29 @@ public class Stocks implements Serializable {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(int reviews) {
+        this.reviews = reviews;
     }
 }
