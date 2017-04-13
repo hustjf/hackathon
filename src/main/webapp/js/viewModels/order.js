@@ -3,14 +3,12 @@
  * The Universal Permissive License (UPL), Version 1.0
  */
 /*
- * Your customer ViewModel code goes here
+ * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojlistview',
-        'ojs/ojmodel', 'ojs/ojgauge', 'ojs/ojbutton', 'ojs/ojcheckboxset',
-        'ojs/ojselectcombobox', 'ojs/ojpagingcontrol', 'ojs/ojcollectiontabledatasource', 'ojs/ojpagingtabledatasource'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton', 'ojs/ojdialog', 'ojs/ojinputtext', 'ojs/ojselectcombobox'],
  function(oj, ko, $) {
   
-    function CustomerViewModel() {
+    function DashboardViewModel() {
       var self = this;
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
@@ -68,120 +66,208 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         // Implement if needed
       };
 
-        var criteriaMap = {};
-        criteriaMap['lh'] = {key: 'PRICE', direction: 'ascending'};
-        criteriaMap['hl'] = {key: 'PRICE', direction: 'descending'};
-        criteriaMap['reviews'] = {key: 'REVIEWS', direction: 'descending'};
-        criteriaMap['date'] = {key: 'PUBLISH_DATE', direction: 'ascending'};
+        // var dataArray = [{materialsid: 123, currentstock: 123, matname: "haha", price: 123, save: 123, suk: "haha", supplier: "haha", totalstock: 123, type: "haha", unit: "haha"}];
 
-        var filters = ['lt30', '30to40', '40to50', 'gt50', 'five', 'four', 'three', 'two', 'dcoward', 'jbrock', 'hschildt', 'jmanico', 'mnaftalin'];
+        self.datasource = null;
 
-        var filterFunc = {};
-        filterFunc['lt30'] = function(model) { return (parseFloat(model.get('PRICE')) < 30); };
-        filterFunc['30to40'] = function(model) { return (parseFloat(model.get('PRICE')) > 30 && parseFloat(model.get('PRICE')) < 40); };
-        filterFunc['40to50'] = function(model) { return (parseFloat(model.get('PRICE')) >= 40 && parseFloat(model.get('PRICE')) <= 50); };
-        filterFunc['gt50'] = function(model) { return (parseFloat(model.get('PRICE')) > 50); };
-
-        filterFunc['five'] = function(model) { return (parseFloat(model.get('RATING')) == 5); };
-        filterFunc['four'] = function(model) { return (parseFloat(model.get('RATING')) >= 4); };
-        filterFunc['three'] = function(model) { return (parseFloat(model.get('RATING')) >= 3); };
-        filterFunc['two'] = function(model) { return (parseFloat(model.get('RATING')) < 3); };
-
-        filterFunc['dcoward'] = function(model) { return (model.get('AUTHOR').indexOf('Danny Coward') > -1); };
-        filterFunc['jbrock'] = function(model) { return (model.get('AUTHOR').indexOf('John Brock') > -1); };
-        filterFunc['jmanico'] = function(model) { return (model.get('AUTHOR').indexOf('Jim Manico') > -1); };
-        filterFunc['hschildt'] = function(model) { return (model.get('AUTHOR').indexOf('Herbert Schildt') > -1); };
-        filterFunc['mnaftalin'] = function(model) { return (model.get('AUTHOR').indexOf('Maurice Naftalin') > -1); };
-
-        var converterFactory = oj.Validation.converterFactory("number");
-        var currencyOptions =
-            {
-                style: "currency",
-                currency: "USD",
-                currencyDisplay:"symbol"
-            };
-        this.currencyConverter = converterFactory.createConverter(currencyOptions);
-
-        var model = oj.Model.extend({
-            idAttribute: 'ID'
+        $.ajax({
+            url: "./rest/stock",
+            type: "GET",
+            data: {},
+            dataType: "",
+            success: function (response, textStatus) {
+                self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
+                $('#table').ojTable({"data" : self.datasource});
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+            }
         });
 
-        this.collection = new oj.Collection(null, {
-            url: 'productData.json',
-            model: model
-        });
-        var originalCollection = this.collection;
+        self.updatematerialsid = "";
+        self.updatecurrentstock = "";
+        self.updatematname = "";
+        self.updateprice = "";
+        self.updatesave = "";
+        self.updatesuk = "";
+        self.updatesupplier = "";
+        self.updatetotalstock = "";
+        self.updatetype = "";
+        self.updateunit = "";
+        self.addmaterialsid = "";
+        self.addcurrentstock = "";
+        self.addmatname = "";
+        self.addprice = "";
+        self.addsave = "";
+        self.addsuk = "";
+        self.addsupplier = "";
+        self.addtotalstock = "";
+        self.addtype = "";
+        self.addunit = "";
+        self.selectval = "";
 
-        this.dataSource = ko.observable(new oj.PagingTableDataSource(new oj.CollectionTableDataSource(this.collection)));
-
-        this.currentPrice = [];
-        this.currentAuthor = [];
-        this.currentRating = [];
-        this.currentSort = ko.observable("default");
-
-        var self = this;
-        this.handleSortCriteriaChanged = function(event, ui)
-        {
-            if (ui.option != 'value' || (ui.value.length == 1 && ui.value[0] == 'default'))
-            {
-                return;
-            }
-
-            var criteria = criteriaMap[ui.value];
-            self.dataSource().sort(criteria);
-        };
-
-        this.handleFilterChanged = function(event, ui)
-        {
-            if (ui.option != 'value')
-            {
-                return;
-            }
-
-            var value = ui.value;
-            if (!Array.isArray(value))
-            {
-                return;
-            }
-
-            var results = [];
-            var processed = false;
-
-            $.each(filters, function(index, filter)
-            {
-                if (value.indexOf(filter) > -1)
-                {
-                    results = results.concat(originalCollection.filter(filterFunc[filter]));
-                    processed = true;
+        self.button_getdata = function(data, event){
+            alert(self.selectval.length === 0);
+            $.ajax({
+                url: "./rest/stock",
+                type: "GET",
+                data: {},
+                dataType: "",
+                success: function (response, textStatus) {
+                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
+                    $('#table').ojTable({"data" : self.datasource});
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
                 }
             });
-
-            if (processed)
-            {
-                self.collection = new oj.Collection(results);
-            }
-            else
-            {
-                self.collection = originalCollection;
-            }
-            self.dataSource(new oj.PagingTableDataSource(new oj.CollectionTableDataSource(self.collection)));
-
-            if (self.currentSort() != "default")
-            {
-                var criteria = criteriaMap[self.currentSort()];
-                self.dataSource().sort(criteria);
-            }
+            return true;
         };
 
+        self.button_openAddDialog = function(data, event){
+            $("#addDialog").ojDialog("open");
+            return true;
+        };
 
+        self.button_openUpdateDialog = function(data, event){
+            var checkedArray = self.findChecked();
+            if (checkedArray.length != 1) {
+                alert("Please select only one data to update!");
+                return;
+            }
+            $("#updateDialog").ojDialog("open");
+            var val = eval('(' + checkedArray[0] + ')');
+            $('#input_updatematerialsid').ojInputText({"value" : val["materialsid"]});
+            $('#input_updatecurrentstock').ojInputText({"value" : val["currentstock"]});
+            $('#input_updatematname').ojInputText({"value" : val["matname"]});
+            $('#input_updateprice').ojInputText({"value" : val["price"]});
+            $('#input_updatesave').ojInputText({"value" : val["save"]});
+            $('#input_updatesuk').ojInputText({"value" : val["suk"]});
+            $('#input_updatesupplier').ojInputText({"value" : val["supplier"]});
+            $('#input_updatetotalstock').ojInputText({"value" : val["totalstock"]});
+            $('#input_updatetype').ojInputText({"value" : val["type"]});
+            $('#input_updateunit').ojInputText({"value" : val["unit"]});
+            self.updatematerialsid = val["materialsid"];
+            self.updatecurrentstock = val["currentstock"];
+            self.updatematname = val["matname"];
+            self.updateprice = val["price"];
+            self.updatesave = val["save"];
+            self.updatesuk = val["suk"];
+            self.updatesupplier = val["supplier"];
+            self.updatetotalstock = val["totalstock"];
+            self.updatetype = val["type"];
+            self.updateunit = val["unit"];
+
+            return true;
+        };
+
+        self.button_adddata = function(data, event){
+            if (self.addmaterialsid === "" || self.addcurrentstock === "" || self.addmatname === "" || self.addprice === "" || self.addsave === "" || self.addsuk === "" || self.addsupplier === "" || self.addtotalstock === "" || self.addtype === "" || self.addunit === "") {
+                alert("Please input all value!");
+                return;
+            }
+            $.ajax({
+                url: "./rest/stock",
+                type: "POST",
+                data: JSON.stringify({materialsid: self.addmaterialsid, currentstock: self.addcurrentstock, matname: self.addmatname, price: self.addprice, save: self.addsave, suk: self.addsuk, supplier: self.addsupplier, totalstock: self.addtotalstock, type: self.addtype, unit: self.addunit}),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("Add Success!");
+                    self.button_getdata();
+                    $('#input_addmaterialsid').ojInputText({"value" : ""});
+                    $('#input_addcurrentstock').ojInputText({"value" : ""});
+                    $('#input_addmatname').ojInputText({"value" : ""});
+                    $('#input_addprice').ojInputText({"value" : ""});
+                    $('#input_addsave').ojInputText({"value" : ""});
+                    $('#input_addsuk').ojInputText({"value" : ""});
+                    $('#input_addsupplier').ojInputText({"value" : ""});
+                    $('#input_addtotalstock').ojInputText({"value" : ""});
+                    $('#input_addtype').ojInputText({"value" : ""});
+                    $('#input_addunit').ojInputText({"value" : ""});
+                    self.addmaterialsid = "";
+                    self.addcurrentstock = "";
+                    self.addmatname = "";
+                    self.addprice = "";
+                    self.addsave = "";
+                    self.addsuk = "";
+                    self.addsupplier = "";
+                    self.addtotalstock = "";
+                    self.addtype = "";
+                    self.addunit = "";
+                    $("#addDialog").ojDialog("close");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return true;
+        };
+
+        self.button_updatedata = function(data, event){
+            $.ajax({
+                url: "./rest/stock",
+                type: "PUT",
+                data: JSON.stringify({materialsid: self.updatematerialsid, currentstock: self.updatecurrentstock, matname: self.updatematname, price: self.updateprice, save: self.updatesave, suk: self.updatesuk, supplier: self.updatesupplier, totalstock: self.updatetotalstock, type: self.updatetype, unit: self.updateunit}),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("Update Success!");
+                    self.button_getdata();
+                    $("#updateDialog").ojDialog("close");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return true;
+        };
+
+        self.findChecked = function() {
+            var selectedArray = [];
+            $("input:checkbox").each(function() {
+                var $this = $(this);
+                if ($this.is(":checked")) {
+                    // alert($this.attr("value"));
+                    selectedArray.push($this.attr("value"));
+                }
+            });
+            return selectedArray;
+        };
+
+        self.button_deletedata = function(data, event){
+            var checkedArray = self.findChecked();
+            if (checkedArray.length == 0) {
+                alert("Please select at least one data to delete!");
+                return;
+            }
+            var jsonArray = [];
+            for (var i = 0; i < checkedArray.length; ++i) {
+                jsonArray.push(eval('(' + checkedArray[i] + ')'));
+            }
+            $.ajax({
+                url: "./rest/stock",
+                type: "DELETE",
+                data: JSON.stringify(jsonArray),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("Delete Success!");
+                    self.button_getdata();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return true;
+        };
     }
-
 
     /*
      * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
      * each time the view is displayed.  Return an instance of the ViewModel if
      * only one instance of the ViewModel is needed.
      */
-    return new CustomerViewModel();
+    return new DashboardViewModel();
   }
 );

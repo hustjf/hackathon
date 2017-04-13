@@ -3,188 +3,228 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 <div class="oj-hybrid-padding">
-    <div id="root">
-        <div class="oj-flex">
-            <div class="oj-lg-2 oj-md-3 oj-sm-only-hide oj-flex-item">
+    <h3>Dashboard Content Area</h3>
+    <table id="table" summary="Procurement List" aria-label="Procurement Table"
+           data-bind="ojComponent: {component: 'ojTable',
+                                data: datasource,
+                                columnsDefault: {sortable: 'none'},
+                                rowTemplate: 'row_tmpl',
+                                columns: [{headerTemplate: 'header_tmpl'},
+                                          {headerText: 'Materialsid',
+                                           field: 'materialsid'},
+                                          {headerText: 'Currentstock',
+                                           field: 'currentstock'},
+                                          {headerText: 'Matname',
+                                           field: 'matname'},
+                                          {headerText: 'Price',
+                                           field: 'price'},
+                                          {headerText: 'Save',
+                                           field: 'save'},
+                                          {headerText: 'Suk',
+                                           field: 'suk'},
+                                          {headerText: 'Supplier',
+                                           field: 'supplier'},
+                                          {headerText: 'Totalstock',
+                                           field: 'totalstock'},
+                                          {headerText: 'Type',
+                                           field: 'type'},
+                                          {headerText: 'Unit',
+                                           field: 'unit'},]}">
+    </table>
 
-                <div class="refined">Refined by</div>
+    <script type="text/html" id="row_tmpl">
+        <tr>
+            <td><input type="checkbox" name="checkrow" data-bind="attr: {value: '{materialsid:' + materialsid + ',currentstock:' + currentstock + ',matname:\'' + matname + '\',price:' + price +
+            ',save:' + save + ',suk:\'' + suk + '\',supplier:\'' + supplier + '\',totalstock:' + totalstock + ',type:\'' + type + '\',unit:\'' + unit + '\'}'}"/></td>
+            <td data-bind="text: materialsid">
+            </td>
+            <td data-bind="text: currentstock">
+            </td>
+            <td data-bind="text: matname">
+            </td>
+            <td data-bind="text: price">
+            </td>
+            <td data-bind="text: save">
+            </td>
+            <td data-bind="text: suk">
+            </td>
+            <td data-bind="text: supplier">
+            </td>
+            <td data-bind="text: totalstock">
+            </td>
+            <td data-bind="text: type">
+            </td>
+            <td data-bind="text: unit">
+            </td>
+        </tr>
+    </script>
 
-                <label id="price_filter_lbl">Price</label>
-                <div id="price_filter" aria-labelledby="price_filter_lbl"
-                     data-bind="ojComponent: {
-          component: 'ojCheckboxset',
-          value: currentPrice, rootAttributes: {style: 'padding-bottom: 15px'}, optionChange: handleFilterChanged}" >
-        <span class="oj-choice-item">
-            <input id="price_opt1" type="checkbox" value="lt30">
-            <label for="price_opt1">Less than $30</label>
-        </span>
-                    <span class="oj-choice-item">
-            <input id="price_opt2" type="checkbox" value="30to40">
-            <label for="price_opt2">$30 - $39.99</label>
-        </span>
-                    <span class="oj-choice-item">
-            <input id="price_opt3" type="checkbox" value="40to50">
-            <label for="price_opt3">$40 - $50</label>
-        </span>
-                    <span class="oj-choice-item">
-            <input id="price_opt4" type="checkbox" value="gt50">
-            <label for="price_opt4">Greater than $50</label>
-        </span>
-                </div>
+    <script type="text/html" id="header_tmpl">
+        <tr>
+            <td><input type="checkbox" id="checkall"/></td>
 
-                <label id="author_filter_lbl">Supplier</label>
-                <div id="author_filter" aria-labelledby="author_filter_lbl"
-                     data-bind="ojComponent: {
-          component: 'ojCheckboxset',
-          value: currentAuthor, rootAttributes: {style: 'padding-bottom: 15px'}, optionChange: handleFilterChanged}" >
-          <span class="oj-choice-item">
-              <input id="dcoward" type="checkbox" value="dcoward">
-              <label for="dcoward">Danny Coward</label>
-          </span>
-                    <span class="oj-choice-item">
-              <input id="hschildt" type="checkbox" value="hschildt">
-              <label for="hschildt">Herbert Schildt</label>
-          </span>
-                    <span class="oj-choice-item">
-              <input id="jmanico" type="checkbox" value="jmanico">
-              <label for="jmanico">Jim Manico</label>
-          </span>
-                    <span class="oj-choice-item">
-              <input id="jbrock" type="checkbox" value="jbrock">
-              <label for="jbrock">John Brock</label>
-          </span>
-                    <span class="oj-choice-item">
-              <input id="mnaftalin" type="checkbox" value="mnaftalin">
-              <label for="mnaftalin">Maurice Naftalin</label>
-          </span>
-                </div>
+        </tr>
+    </script>
 
-                <label id="rating_filter_lbl">Type</label>
-                <div id="rating_filter" aria-labelledby="rating_filter_lbl"
-                     data-bind="ojComponent: {
-          component: 'ojCheckboxset',
-          value: currentRating, rootAttributes: {style: 'padding-bottom: 15px'}, optionChange: handleFilterChanged}" >
-          <span class="oj-choice-item">
-              <input id="fivestars" type="checkbox" value="five">
-              <label for="fivestars">5 Stars</label>
-          </span>
-                    <span class="oj-choice-item">
-              <input id="fourstars" type="checkbox" value="four">
-              <label for="fourstars">4 or More Stars</label>
-          </span>
-                    <span class="oj-choice-item">
-              <input id="threestars" type="checkbox" value="three">
-              <label for="threestars">3 or More Stars</label>
-          </span>
-                    <span class="oj-choice-item">
-              <input id="twostars" type="checkbox" value="two">
-              <label for="twostars">Less than 3 Stars</label>
-          </span>
-                </div>
+    <br>
 
+    <label for="basicSelect">Type  </label>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                                    value: selectval,
+                                                    placeholder: 'None',
+                                                    rootAttributes: {style:'max-width:20em'}}">
+        <option value="IE">Internet Explorer</option>
+        <option value="FF">Firefox</option>
+        <option value="CH">Chrome</option>
+        <option value="OP">Opera</option>
+        <option value="SA">Safari</option>
+    </select>
+
+    <button id="button_getdata"
+            data-bind="click: button_getdata,
+                       ojComponent: { component: 'ojButton', label: 'Get Data' }">
+    </button>
+
+
+    <button id="button_openAddDialog"
+            data-bind="click: button_openAddDialog,
+                       ojComponent: { component: 'ojButton', label: 'Add Data' }">
+    </button>
+
+    <button id="button_openUpdateDialog"
+            data-bind="click: button_openUpdateDialog,
+                       ojComponent: { component: 'ojButton', label: 'Update Data' }">
+    </button>
+
+    <button id="button_deletedata"
+            data-bind="click: button_deletedata,
+                       ojComponent: { component: 'ojButton', label: 'Delete Data' }">
+    </button>
+
+    <div id="dialogWrapper_add">
+        <div style="height:300px;width:500px;display:none" id="addDialog" title="Add Data"
+             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+            <div class="oj-dialog-body">
+                <label for="input_addmaterialsid">Materialsid</label>
+                <input id="input_addmaterialsid"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addmaterialsid}"/>
+                <label for="input_addcurrentstock">Currentstock</label>
+                <input id="input_addcurrentstock"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addcurrentstock}"/>
+                <label for="input_addmatname">Matname</label>
+                <input id="input_addmatname"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addmatname}"/>
+                <label for="input_addprice">Price</label>
+                <input id="input_addprice"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addprice}"/>
+                <label for="input_addsave">Save</label>
+                <input id="input_addsave"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addsave}"/>
+                <label for="input_addsuk">Suk</label>
+                <input id="input_addsuk"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addsuk}"/>
+                <label for="input_addsupplier">Supplier</label>
+                <input id="input_addsupplier"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addsupplier}"/>
+                <label for="input_addtotalstock">Totalstock</label>
+                <input id="input_addtotalstock"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addtotalstock}"/>
+                <label for="input_addtype">Type</label>
+                <input id="input_addtype"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addtype}"/>
+                <label for="input_addunit">Unit</label>
+                <input id="input_addunit"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: addunit}"/>
             </div>
-            <div class="oj-lg-10 oj-md-9 oj-sm-12 oj-flex-item">
-
-                <div class="oj-flex">
-                    <div class="oj-lg-6 oj-md-6 oj-sm-12 oj-flex-item">
-
-                        <label for="sortBy" class="oj-label-inline">Sort by:</label>
-                        <select id="sortBy" data-bind="ojComponent: {component: 'ojSelect',
-                                                    value: currentSort, rootAttributes: {style:'max-width:11em'}, optionChange: handleSortCriteriaChanged}">
-                            <option value="default">New and Popular</option>
-                            <option value="lh">Price: Low to High</option>
-                            <option value="hl">Price: High to Low</option>
-                            <option value="reviews">Most Reviews</option>
-                            <option value="date">Publication Date</option>
-                        </select>
-
-                    </div>
-                    <div class="oj-lg-6 oj-md-6 oj-sm-12 oj-flex-item">
-                        <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: dataSource, pageSize: 3}">
-                        </div>
-                    </div>
-                    <ul id="listview" aria-label="list with external sort and filter controls"
-                        data-bind="ojComponent: {component: 'ojListView', data: dataSource, item: {template: 'product_template'}, selectionMode: 'single', rootAttributes: {style: 'width:100%'} }">
-                    </ul>
-
-                </div>
+            <div class="oj-dialog-footer">
+                <button id="okAddButton" data-bind="click: button_adddata,
+                                        ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
             </div>
+        </div>
 
-            <script type="text/html" id="product_template">
-                <li data-bind="attr: {id: ID}">
-                    <div class="oj-flex">
-                        <div class="oj-lg-3 oj-md-3 oj-sm-4 oj-flex-item" style="max-width:150px;padding-left:0;padding-right:10px">
-                            <div data-bind="style: { backgroundImage: 'url('+ IMAGE_URL +')',
-                     backgroundRepeat: 'no-repeat', backgroundSize: '100%', backgroundPosition: 'center',
-                     height: '172px', width: '100%' }">
-                            </div>
-                        </div>
-                        <div class="oj-lg-9 oj-md-9 oj-sm-8 oj-flex-item">
-                            <div class="oj-flex">
-                                <div class="oj-lg-9 oj-md-9 oj-sm-12 oj-flex-item">
-                                    <div>
-                                        <div><h4><a href="?root=detail" data-bind="text: TITLE"></a></h4></div>
-                                    </div>
-                                    <div>
-                                        <div><span>By <a href="#" data-bind="text: AUTHOR"></a></span></div>
-                                    </div>
+    </div>
 
-                                    <div class="oj-flex">
-                                        <div class="oj-lg-12 oj-md-12 oj-sm-only-hide oj-flex-item" style="padding:0">
-                                            <div class="sku-model">
-                                                <ul>
-                                                    <li><span class="label">SKU:</span> <span data-bind="text: ID"></span></li>
-                                                    <li><span class="label">Release Date:</span> <span data-bind="text: PUBLISH_DATE"></span></li>
-                                                    <li><span class="label">Format:</span> <span>Paperback</span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="oj-flex">
-                                        <div class="oj-lg-12 oj-md-12 oj-sm-12 oj-flex-item" style="padding:0">
-                                            <div style="width:100%">
-                                                <div data-bind="ojComponent: {
-                                         component: 'ojRatingGauge',
-                                         value: RATING,
-                                         rootAttributes:{id:'gauge' + $itemContext.index}}"
-                                                     style="width:86px;height:20px;display:inline-block;vertical-align:text-bottom">
-                                                </div>
-                                                <span data-bind="text: RATING"></span>
-                                                <span>(<a href="#" class="tab-link" data-bind="text: REVIEWS + ' Reviews'"></a>)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="oj-flex">
-                                        <div class="oj-lg-12 oj-md-12 oj-sm-only-hide oj-flex-item" style="padding:10px 0">
-                                            <a class="sku-model" href="#">Check Shipping &amp; Availability</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="oj-lg-3 oj-md-3 oj-sm-12 oj-flex-item">
-                                    <div>
-                                        <div class="price-block">
-                                            <div class="priceblock priceblock-medium">
-                                                <div class="medium-item-price"><span class="denominator" data-bind="text: $parent.currencyConverter.format(PRICE)"></span></div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 5px 0">
-                                            <button id="button" + $itemContext.index data-bind="ojComponent: { component: 'ojButton', label: 'Add to cart'}">
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="oj-flex">
-                                        <div class="oj-lg-12 oj-md-12 oj-sm-only-hide oj-flex-item" style="padding:0">
-                                            <div class="offers">
-                                                <ul>
-                                                    <li><a href="#">Free Shipping on Orders $35 and Up</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </script>
+    <div id="dialogWrapper_update">
+        <div style="height:300px;width:500px;display:none" id="updateDialog" title="Update Data"
+             data-bind="ojComponent:{component: 'ojDialog', initialVisibility: 'hide'}">
+            <div class="oj-dialog-body">
+                <label for="input_updatematerialsid">Materialsid</label>
+                <input id="input_updatematerialsid"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatematerialsid,
+                                  disabled: true}"/>
+                <label for="input_updatecurrentstock">Currentstock</label>
+                <input id="input_updatecurrentstock"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatecurrentstock}"/>
+                <label for="input_updatematname">Matname</label>
+                <input id="input_updatematname"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatematname}"/>
+                <label for="input_updateprice">Price</label>
+                <input id="input_updateprice"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updateprice}"/>
+                <label for="input_updatesave">Save</label>
+                <input id="input_updatesave"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatesave}"/>
+                <label for="input_updatesuk">Suk</label>
+                <input id="input_updatesuk"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatesuk}"/>
+                <label for="input_updatesupplier">Supplier</label>
+                <input id="input_updatesupplier"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatesupplier}"/>
+                <label for="input_updatetotalstock">Totalstock</label>
+                <input id="input_updatetotalstock"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatetotalstock}"/>
+                <label for="input_updatetype">Type</label>
+                <input id="input_updatetype"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updatetype}"/>
+                <label for="input_updateunit">Unit</label>
+                <input id="input_updateunit"
+                       type="text"
+                       data-bind="ojComponent: {component: 'ojInputText',
+                                  value: updateunit}"/>
+            </div>
+            <div class="oj-dialog-footer">
+                <button id="okUpdateButton" data-bind="click: button_updatedata,
+                                        ojComponent: {component: 'ojButton', label: 'OK'}"> </button>
+            </div>
+        </div>
+
+    </div>
 </div>

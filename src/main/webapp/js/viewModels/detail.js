@@ -5,7 +5,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontrol', 'ojs/ojknockout', 'ojs/ojinputtext'],
  function(oj, ko, $) {
   
     function AboutViewModel() {
@@ -65,6 +65,11 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
       self.handleDetached = function(info) {
         // Implement if needed
       };
+
+      self.name = "computer";
+      self.price = "$999";
+      self.supplier = "apple";
+      self.description = "hahaha";
     }
 
     /*
