@@ -97,8 +97,8 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontr
                 $('#text-price').ojInputText({"value" : self.price});
                 $('#text-supplier').ojInputText({"value" : self.supplier});
                 $('#textarea-description').ojInputText({"value" : self.description});
-                alert(image1);
-                alert(image2);
+                // alert(image1);
+                // alert(image2);
                 $("#img1").attr("src", image1);
                 $("#img2").attr("src", image2);
             },
