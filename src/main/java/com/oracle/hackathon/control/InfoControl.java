@@ -2,7 +2,6 @@ package com.oracle.hackathon.control;
 
 import com.oracle.hackathon.entities.Info;
 import com.oracle.hackathon.service.InfoService;
-import com.sun.tracing.dtrace.ProviderAttributes;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -33,8 +32,8 @@ public class InfoControl {
         }
     }
 
-    @Path("getById")
-    @GET
+    @Path("/getById")
+    @POST
     @Produces("application/json")
     public Response getById(@FormParam("id") String id) {
         try {

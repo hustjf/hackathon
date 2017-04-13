@@ -66,17 +66,41 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojfilmstrip', 'ojs/ojpagingcontr
         // Implement if needed
       };
 
-      self.name = "computer";
-      self.price = "$999";
-      self.supplier = "apple";
-      self.description = "hahaha";
+      self.name = "";
+      self.price = "";
+      self.supplier = "";
+      self.description = "";
+        function getQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
         $.ajax({
-            url: "./rest/info",
-            type: "GET",
-            data: {},
+            url: "./rest/info/getById",
+            type: "POST",
+            data: {id : getQueryString("id")},
             dataType: "",
             success: function (response, textStatus) {
+                self.name=response['name'];
+                self.price=response['price'];
+                self.supplier=response['supplier'];
+                self.description=response['description'];
+                self.images= response ['image'];
+                var images = self.images.split(";");
+                var image1 = $.trim(images[0]);
+                var image2 = $.trim(images[1]);
 
+                $('#text-name').ojInputText({"value" : self.name});
+                $('#text-price').ojInputText({"value" : self.price});
+                $('#text-supplier').ojInputText({"value" : self.supplier});
+                $('#textarea-description').ojInputText({"value" : self.description});
+                alert(image1);
+                alert(image2);
+                $("#img1").attr("src", image1);
+                $("#img2").attr("src", image2);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert(XMLHttpRequest.responseText);

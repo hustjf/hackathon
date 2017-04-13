@@ -131,7 +131,7 @@
                             <div class="oj-flex">
                                 <div class="oj-lg-9 oj-md-9 oj-sm-12 oj-flex-item">
                                     <div>
-                                        <div><h4><a href="?root=detail&title=" data-bind="text: name"></a></h4></div>
+                                        <div><h4><a href="#" data-bind="text: name"></a></h4></div>
                                     </div>
                                     <div>
                                         <div><span>Supported by <a href="#" data-bind="text: supplier"></a></span></div>
@@ -176,7 +176,9 @@
                                             </div>
                                         </div>
                                         <div style="padding: 5px 0">
-                                            <button id="button" + $itemContext.index data-bind="click: $parent.addtocart, ojComponent: { component: 'ojButton', label: 'Add to cart'}">
+                                            <button id="button1" + $itemContext.index data-bind="click: $parent.addtocart, ojComponent: { component: 'ojButton', label: 'Add to cart'}">
+                                            </button>
+                                            <button id="button2" + $itemContext.index data-bind="click: $parent.seeDetail, ojComponent: { component: 'ojButton', label: 'See Detail'}">
                                             </button>
 
                                         </div>

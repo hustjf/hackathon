@@ -210,9 +210,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                         alert(XMLHttpRequest.responseText);
                     }
                 });
+            };
+
+            self.seeDetail =function(data){
+                location.href="?root=detail&id=" + $(this).attr("id");
             }
-
-
         }
 
 
