@@ -1,14 +1,21 @@
 package com.oracle.hackathon.util;
 
+import com.oracle.hackathon.entities.Cart;
 import com.oracle.hackathon.entities.Stocks;
 import com.oracle.hackathon.service.StocksService;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.Response;
 import java.io.*;
 import java.util.List;
 
 /**
  * Created by xinyuan.zhang on 4/13/17.
  */
+@Path("/jsonutil")
 public class JsonUtil {
 
     private static StocksService stocksService = new StocksService();
@@ -20,78 +27,49 @@ public class JsonUtil {
         //jsonUtil.deleteFile(jsonUtil.getFilePath());
         //jsonUtil.createFile(jsonUtil.getFilePath());
         //jsonUtil.listToJson(stocksService.findAll());
-        jsonUtil.writeFile();
+        //jsonUtil.writeFile();
     }
 
     public String getFilePath() {
-        return "/Users/xinyuan.zhang/workspace/hackathonFinal/hackathon/src/main/webapp/productData.json";
+        return "productData.json";
     }
 
-
-    public void createFile(String filePath) {
-        File file = new File(getFilePath());
-        try {
-
-            if(!file.exists()) {
-                file.createNewFile();
-            } else {
-                deleteFile(filePath);
-                file.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public String listToJson(List<Stocks> stocks) {
 
         List<Stocks> list = stocksService.findAll();
         net.sf.json.JSONArray json = net.sf.json.JSONArray.fromObject(list);
-
-        System.out.println(json.toString());
-        return "";
+        return json.toString();
     }
 
-    public void writeFile() {
+    @GET
+    @Produces("text/plain")
+    public Response writeFile() {
 
         String filepath = getFilePath();
         String string = listToJson(stocksService.findAll());
         File file=new File(filepath);
-        createFile(filepath);
-        FileOutputStream out= null;
+        byte bt[] = new byte[1024];
+        bt = string.getBytes();
         try {
-            out = new FileOutputStream(file,true);
+            FileOutputStream in = new FileOutputStream(file);
+            in.write(bt, 0, bt.length);
+            in.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-
-        StringBuffer sb=new StringBuffer();
-        sb.append(string);
-        try {
-            out.write(sb.toString().getBytes("utf-8"));
-            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void deleteFile(String filePath) {
-        File file = new File(filePath);
-        if(file.exists()) {
-            file.delete();
+        
+        try {
+            GenericEntity<List<Stocks>> entity = new GenericEntity<List<Stocks>>(null){};
+            return Response.status(Response.Status.OK).entity(entity).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
 
 
     }
-
-    public void getDataFromDb() {
-
-
-
-
-    }
-
 
 }
