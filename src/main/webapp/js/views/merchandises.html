@@ -68,10 +68,23 @@
 
     <br>
 
+    <label for="basicSelect">Type  </label>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                                    value: selectval,
+                                                    placeholder: 'None',
+                                                    rootAttributes: {style:'max-width:20em'}}">
+        <option value="IE">Internet Explorer</option>
+        <option value="FF">Firefox</option>
+        <option value="CH">Chrome</option>
+        <option value="OP">Opera</option>
+        <option value="SA">Safari</option>
+    </select>
+
     <button id="button_getdata"
             data-bind="click: button_getdata,
                        ojComponent: { component: 'ojButton', label: 'Get Data' }">
     </button>
+
 
     <button id="button_openAddDialog"
             data-bind="click: button_openAddDialog,

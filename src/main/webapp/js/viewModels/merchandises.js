@@ -5,7 +5,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton', 'ojs/ojdialog', 'ojs/ojinputtext'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojtable', 'ojs/ojarraytabledatasource', 'ojs/ojbutton', 'ojs/ojdialog', 'ojs/ojinputtext', 'ojs/ojselectcombobox'],
  function(oj, ko, $) {
   
     function DashboardViewModel() {
@@ -104,8 +104,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         self.addtotalstock = "";
         self.addtype = "";
         self.addunit = "";
+        self.selectval = "";
 
         self.button_getdata = function(data, event){
+            alert(self.selectval.length === 0);
             $.ajax({
                 url: "./rest/stock",
                 type: "GET",
