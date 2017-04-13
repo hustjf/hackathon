@@ -61,7 +61,7 @@ public class JsonUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         try {
             GenericEntity<List<Stocks>> entity = new GenericEntity<List<Stocks>>(null){};
             return Response.status(Response.Status.OK).entity(entity).build();

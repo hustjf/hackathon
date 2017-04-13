@@ -58,7 +58,6 @@ public class CartControl {
         }
 
         try {
-            cartService.addById(Integer.parseInt(id));
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
