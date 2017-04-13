@@ -75,4 +75,12 @@ public class Cart implements Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public int getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(int orderid) {
+        this.orderid = orderid;
+    }
 }
