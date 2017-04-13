@@ -32,7 +32,17 @@ public class JsonUtil {
     }
 
     public String getFilePath() {
-        return "/productData.json";
+        String t=Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String[] strs=t.split("/");
+        StringBuilder path=new StringBuilder("");
+        for(String s:strs) {
+            if(s.equals("WEB-INF")) {
+                break;
+            }
+            path.append(s);
+            path.append("/");
+        }
+        return path.toString()+"productData.json";
     }
 
 
@@ -49,8 +59,6 @@ public class JsonUtil {
     public Response writeFile() {
         try {
             String filepath = getFilePath();
-            File directory = new File("");
-            String p = directory.getAbsolutePath();
             String string = listToJson(stocksService.findAll());
             File file=new File(filepath);
             byte bt[] = new byte[1024];
