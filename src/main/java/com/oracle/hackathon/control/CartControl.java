@@ -31,14 +31,14 @@ public class CartControl {
         }
     }
 
-
+    @Path("/addtoCart")
     @POST
     // The Java method will produce content identified by the MIME Media type "text/plain"
-    @Consumes("application/json")
+    //@Consumes("application/json")
     @Produces("text/plain")
-    public Response addData(Cart cart) {
+    public Response addData(String id) {
         try {
-            cartService.addCart(cart);
+            cartService.addById(Integer.parseInt(id));
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

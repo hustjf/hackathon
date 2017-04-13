@@ -23,6 +23,10 @@ public class CartService {
         cartDao.add(cart);
     }
 
+    public void addById(int id) {
+        cartDao.addById(id);
+    }
+
     public void updateCart(Cart cart) {
         cartDao.update(cart);
     }

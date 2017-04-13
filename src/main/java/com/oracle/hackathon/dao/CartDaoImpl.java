@@ -30,6 +30,13 @@ public class CartDaoImpl extends AbstractDao {
         em.getTransaction().commit();
     }
 
+    public void addById(int id) {
+        Cart cart = findById(id);
+        em.getTransaction().begin();
+        em.persist(cart);
+        em.getTransaction().commit();
+    }
+
     public void delete(List<Cart> carts) {
         em.getTransaction().begin();
         for (Cart cart : carts) {
