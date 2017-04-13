@@ -179,6 +179,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 self.dataSource().sort(criteria);
             }
         };
+
+        function forwardtoDetail() {
+            var id = model.get('ID');
+            var href = "?root=detail&title="+id;
+            document.getElementById("href").setAttribute("href",href);
+
+        };
+
        
 
         self.addtocart =function(data, event){

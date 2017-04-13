@@ -1,7 +1,9 @@
 package com.oracle.hackathon.control;
 
 import com.oracle.hackathon.entities.Cart;
+import com.oracle.hackathon.entities.Stocks;
 import com.oracle.hackathon.service.CartService;
+import com.oracle.hackathon.service.StocksService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -15,6 +17,7 @@ import java.util.List;
 @Path("/cart")
 public class CartControl {
     private CartService cartService = new CartService();
+    private StocksService stocksService = new StocksService();
 
     @GET
     @Produces("application/json")
@@ -33,10 +36,27 @@ public class CartControl {
 
     @Path("/addtoCart")
     @POST
-    // The Java method will produce content identified by the MIME Media type "text/plain"
-    //@Consumes("application/json")
     @Produces("text/plain")
     public Response addData(String id) {
+
+        Stocks stock = stocksService.findById(Integer.parseInt(id));
+        stock.setCount(stock.getCount()-1);
+        stocksService.updateStock(stock);
+
+        Cart cart = cartService.findById(Integer.parseInt(id));
+        if(cart == null) {
+            cart = new Cart();
+            cart.setId(stock.getId());
+            cart.setPrice(stock.getPrice());
+            cart.setName(stock.getName());
+            cart.setType(stock.getType());
+            cart.setCount(1);
+            cartService.addCart(cart);
+        } else {
+            cart.setCount(cart.getCount()+1);
+            cartService.updateCart(cart);
+        }
+
         try {
             cartService.addById(Integer.parseInt(id));
             return Response.status(Response.Status.OK).build();
