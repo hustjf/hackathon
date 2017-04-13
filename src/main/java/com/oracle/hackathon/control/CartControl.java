@@ -37,7 +37,7 @@ public class CartControl {
     @Path("/addtoCart")
     @POST
     @Produces("text/plain")
-    public Response addData(String id) {
+    public Response addData(@FormParam("id") String id) {
 
         try {
             Stocks stock = stocksService.findById(Integer.parseInt(id));
