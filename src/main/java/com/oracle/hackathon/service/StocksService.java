@@ -24,6 +24,10 @@ public class StocksService {
         return stockDao.findByField(type,supplier,floorPrice,ceilingPrice);
     }
 
+    public List<Stocks> findByInput(String input) {
+        return stockDao.findByInput(input);
+    }
+
     public void addStock(Stocks stock) {
         stockDao.add(stock);
     }

@@ -33,7 +33,7 @@ public class JsonUtil {
     }
 
     public String getFilePath() {
-        return "productData.json";
+        return "/productData.json";
     }
 
 
@@ -50,6 +50,7 @@ public class JsonUtil {
     public Response writeFile() {
         try {
             String filepath = getFilePath();
+            System.out.println(filepath);
             String string = listToJson(stocksService.findAll());
             File file=new File(filepath);
             byte bt[] = new byte[1024];

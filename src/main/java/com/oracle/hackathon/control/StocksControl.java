@@ -30,6 +30,21 @@ public class StocksControl {
     }
 
 
+    //@GET
+    //@Produces("application/json")
+    public Response searchData(String input) {
+
+        List<Stocks> stockList;
+        try {
+            stockList = stockService.findByInput(input);
+            GenericEntity<List<Stocks>> entity = new GenericEntity<List<Stocks>>(stockList){};
+            return Response.status(Response.Status.OK).entity(entity).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+
     @POST
     // The Java method will produce content identified by the MIME Media type "text/plain"
     @Consumes("application/json")

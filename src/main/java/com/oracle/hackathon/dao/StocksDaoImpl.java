@@ -85,9 +85,56 @@ public class StocksDaoImpl extends AbstractDao  {
         return query.getResultList();
     }
 
+    public List<Stocks> findByInput(String input) {
+        Query query = null;
+        List<Stocks> stocks = null;
+
+        StringBuilder sql = new StringBuilder("select * from  Stocks s where ");
+        sql.append("type like:s1 ");
+        query = em.createNativeQuery(sql.toString(),Stocks.class);
+        query.setParameter("s1", "%"+input+"%");
+        stocks = query.getResultList();
+
+        if(stocks !=null)
+            return stocks;
+
+        sql = new StringBuilder("select * from  Stocks s where ");
+        sql.append("supplier like:s1 ");
+        query = em.createNativeQuery(sql.toString(),Stocks.class);
+        query.setParameter("s1", "%"+input+"%");
+        stocks = query.getResultList();
+
+        if(stocks !=null)
+            return stocks;
+
+
+        sql = new StringBuilder("select * from  Stocks s where ");
+        sql.append("name like:s1 ");
+        query = em.createNativeQuery(sql.toString(),Stocks.class);
+        query.setParameter("s1", "%"+input+"%");
+        stocks = query.getResultList();
+
+        if(stocks !=null)
+            return stocks;
+
+
+        sql = new StringBuilder("select * from  Stocks s where ");
+        sql.append("suk like:s1 ");
+        query = em.createNativeQuery(sql.toString(),Stocks.class);
+        query.setParameter("s1", "%"+input+"%");
+        stocks = query.getResultList();
+
+        if(stocks !=null)
+            return stocks;
+
+        return null;
+
+
+    }
+
     public static void main(String[] args) {
         StocksDaoImpl s = new StocksDaoImpl(Stocks.class);
-        List<Stocks> list = s.findByField("Computer","Dell",-1,-1);
+       /* List<Stocks> list = s.findByField("Computer","Dell",-1,-1);
         for(Stocks stock:list){
             System.out.println(stock.getName());
         }
@@ -95,7 +142,12 @@ public class StocksDaoImpl extends AbstractDao  {
         list = s.findByField("","Dell",100,5200);
         for(Stocks stock:list){
             System.out.println(stock.getName());
+        }*/
+
+        for(Stocks stock:s.findByInput("computer")){
+            System.out.println(stock.getName());
         }
+
     }
 
 }
