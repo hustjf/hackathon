@@ -67,16 +67,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
       };
 
         // var dataArray = [{materialsid: 123, currentstock: 123, matname: "haha", price: 123, save: 123, suk: "haha", supplier: "haha", totalstock: 123, type: "haha", unit: "haha"}];
-
-        self.datasource = null;
+        self.datasource=null;
 
         $.ajax({
-            url: "./rest/stock",
+            url: "./rest/orders",
             type: "GET",
             data: {},
             dataType: "",
             success: function (response, textStatus) {
-                self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
+                self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'id'});
                 $('#table').ojTable({"data" : self.datasource});
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -84,37 +83,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             }
         });
 
-        self.updatematerialsid = "";
-        self.updatecurrentstock = "";
-        self.updatematname = "";
-        self.updateprice = "";
-        self.updatesave = "";
-        self.updatesuk = "";
-        self.updatesupplier = "";
-        self.updatetotalstock = "";
-        self.updatetype = "";
-        self.updateunit = "";
-        self.addmaterialsid = "";
-        self.addcurrentstock = "";
-        self.addmatname = "";
-        self.addprice = "";
-        self.addsave = "";
-        self.addsuk = "";
-        self.addsupplier = "";
-        self.addtotalstock = "";
-        self.addtype = "";
-        self.addunit = "";
-        self.selectval = "";
-
         self.button_getdata = function(data, event){
-            alert(self.selectval.length === 0);
+     //       alert(self.selectval.length === 0);
             $.ajax({
-                url: "./rest/stock",
+                url: "./rest/orders",
                 type: "GET",
                 data: {},
                 dataType: "",
                 success: function (response, textStatus) {
-                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'materialsid'});
+                    self.datasource = new oj.ArrayTableDataSource(response, {idAttribute: 'id'});
                     $('#table').ojTable({"data" : self.datasource});
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -123,12 +100,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             });
             return true;
         };
-
+/*
         self.button_openAddDialog = function(data, event){
             $("#addDialog").ojDialog("open");
             return true;
         };
+*/
 
+/*
         self.button_openUpdateDialog = function(data, event){
             var checkedArray = self.findChecked();
             if (checkedArray.length != 1) {
@@ -160,7 +139,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
 
             return true;
         };
+/*
 
+ */
+/*
         self.button_adddata = function(data, event){
             if (self.addmaterialsid === "" || self.addcurrentstock === "" || self.addmatname === "" || self.addprice === "" || self.addsave === "" || self.addsuk === "" || self.addsupplier === "" || self.addtotalstock === "" || self.addtype === "" || self.addunit === "") {
                 alert("Please input all value!");
@@ -203,7 +185,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             });
             return true;
         };
-
+*/
+  /*
         self.button_updatedata = function(data, event){
             $.ajax({
                 url: "./rest/stock",
@@ -222,7 +205,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             });
             return true;
         };
-
+*/
         self.findChecked = function() {
             var selectedArray = [];
             $("input:checkbox").each(function() {
@@ -246,7 +229,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
                 jsonArray.push(eval('(' + checkedArray[i] + ')'));
             }
             $.ajax({
-                url: "./rest/stock",
+                url: "./rest/orders",
                 type: "DELETE",
                 data: JSON.stringify(jsonArray),
                 dataType: "",
