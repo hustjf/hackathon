@@ -87,7 +87,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         self.updatecount = "";
         self.updatetype = "";
         self.updateprice = "";
-        self.address = "";
 
 
         self.button_getdata = function(data, event){
@@ -162,6 +161,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             return selectedArray;
         };
 
+        self.findAll = function() {
+            var selectedArray = [];
+            $("input:checkbox").each(function() {
+                var $this = $(this);
+                if ($this.attr("value")) {
+                    // alert($this.attr("value"));
+                    selectedArray.push($this.attr("value"));
+                }
+            });
+            return selectedArray;
+        };
+
         self.button_deletedata = function(data, event){
             var checkedArray = self.findChecked();
             if (checkedArray.length == 0) {
@@ -190,26 +201,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         };
 
         self.button_submit = function(data, event){
-            if (self.address === "") {
-                alert('Please input address!');
-                return;
+            var array = self.findAll();
+            var jsonArray = [];
+            for (var i = 0; i < array.length; ++i) {
+                jsonArray.push(eval('(' + array[i] + ')'));
             }
-
-            // $.ajax({
-            //     url: "./rest/cart",
-            //     type: "PUT",
-            //     data: JSON.stringify({id: self.updateid, name: self.updatename, count: self.updatecount, type: self.updatetype, price: self.updateprice}),
-            //     dataType: "",
-            //     contentType: "application/json",
-            //     success: function (response, textStatus) {
-            //         alert("Update Success!");
-            //         self.button_getdata();
-            //         $("#updateDialog").ojDialog("close");
-            //     },
-            //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //         alert(XMLHttpRequest.responseText);
-            //     }
-            // });
+            $.ajax({
+                url: "./rest/orders",
+                type: "POST",
+                data: JSON.stringify(jsonArray),
+                dataType: "",
+                contentType: "application/json",
+                success: function (response, textStatus) {
+                    alert("Order Success!");
+                    $.ajax({
+                        url: "./rest/cart",
+                        type: "DELETE",
+                        data: JSON.stringify(jsonArray),
+                        dataType: "",
+                        contentType: "application/json",
+                        success: function (response, textStatus) {
+                            self.button_getdata();
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert(XMLHttpRequest.responseText);
+                        }
+                    });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
             return true;
         };
 			

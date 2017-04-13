@@ -181,6 +181,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
         };
        
 
+        self.addtocart =function(data, event){
+
+        }
+
 
     }
 
