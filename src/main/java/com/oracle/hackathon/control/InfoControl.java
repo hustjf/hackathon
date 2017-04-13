@@ -2,6 +2,7 @@ package com.oracle.hackathon.control;
 
 import com.oracle.hackathon.entities.Info;
 import com.oracle.hackathon.service.InfoService;
+import com.sun.tracing.dtrace.ProviderAttributes;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -16,6 +17,7 @@ public class InfoControl {
 
     private InfoService infoService = new InfoService();
 
+    @Path("/getAll")
     @GET
     @Produces("application/json")
     public Response getData() {
@@ -31,9 +33,10 @@ public class InfoControl {
         }
     }
 
+    @Path("getById")
     @GET
     @Produces("application/json")
-    public Response getById(String id) {
+    public Response getById(@FormParam("id") String id) {
         try {
             Info info = infoService.getById(Integer.parseInt(id));
             GenericEntity<Info> entity = new GenericEntity<Info>(info){};
