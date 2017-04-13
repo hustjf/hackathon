@@ -23,10 +23,12 @@ public class OrdersDaoImpl extends AbstractDao {
         return (List<Orders>) super.findAll();
     }
 
-    public void add(Orders order) {
+    public void add(List<Orders> orders) {
 
         em.getTransaction().begin();
-        em.persist(order);
+        for (Orders order : orders) {
+            em.persist(order);
+        }
         em.getTransaction().commit();
     }
 
