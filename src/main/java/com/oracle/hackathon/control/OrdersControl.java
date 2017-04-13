@@ -2,7 +2,9 @@ package com.oracle.hackathon.control;
 
 import com.oracle.hackathon.entities.Cart;
 import com.oracle.hackathon.entities.Orders;
+import com.oracle.hackathon.entities.Stocks;
 import com.oracle.hackathon.service.OrdersService;
+import com.oracle.hackathon.service.StocksService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
@@ -20,6 +22,8 @@ import java.util.List;
 public class OrdersControl {
 
     private OrdersService ordersService = new OrdersService();
+    private StocksService stocksService = new StocksService();
+
 
     @GET
     @Produces("application/json")
@@ -85,6 +89,13 @@ public class OrdersControl {
     @Produces("text/plain")
     public Response deleteData(List<Orders> orders) {
         try {
+
+            for(Orders order:orders) {
+                Stocks stock = stocksService.findById(order.getId());
+                stock.setCount(stock.getCount()+order.getCount());
+                stocksService.updateStock(stock);
+            }
+
             ordersService.deleteOrder(orders);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
