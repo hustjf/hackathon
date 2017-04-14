@@ -19,7 +19,7 @@
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="" />-->
 			<!-- <property name="hibernate.show_sql" value="true"/> -->
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/hackathon" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://alexjiang.net:3306/hackathon" />
 			<property name="hibernate.connection.username" value="hackathon" />
 			<property name="hibernate.connection.password" value="hackathon" />
 	<!-- <property name="hibernate.show_sql" value="true"/>-->
